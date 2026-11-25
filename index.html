@@ -3,74 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ügyszám 1125/2026 – Az Aranyhíd-ügy</title>
+<title>Ügyszám 2912/2026 – A Hóvár-ügy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Special+Elite&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #110f0d;
-    --bg2: #1c1814;
-    --paper: #efe5cf;
-    --paper-dark: #e2d5b7;
-    --ink: #2a2118;
-    --ink-soft: #5b4c3a;
-    --red: #a8231b;
-    --brass: #c9a35b;
-    --brass-soft: #8c7240;
-    --line: rgba(201, 163, 91, 0.25);
+    --bg: #0b1016;
+    --bg2: #141c25;
+    --paper: #eee6d3;
+    --paper-dark: #ddd3bc;
+    --ink: #241d16;
+    --ink-soft: #594b3b;
+    --red: #a32a22;
+    --ice: #a9c7da;
+    --ice-soft: #6f8ea3;
+    --line: rgba(169, 199, 218, 0.22);
     --serif: 'Playfair Display', Georgia, serif;
     --type: 'Special Elite', 'Courier New', monospace;
     --sans: 'IBM Plex Sans', system-ui, sans-serif;
   }
   * { box-sizing: border-box; }
-  html { font-size: clamp(16px, 1.12vw, 26px); }
+  html { font-size: clamp(15px, 1.08vw, 25px); }
   body {
-    margin: 0; min-height: 100vh; color: var(--paper); font-family: var(--sans);
+    margin: 0; min-height: 100vh; color: var(--paper); font-family: var(--sans); overflow-x: hidden;
     background:
-      radial-gradient(ellipse at 50% 0%, rgba(201,163,91,0.10), transparent 60%),
-      radial-gradient(ellipse at 50% 120%, rgba(168,35,27,0.10), transparent 55%),
+      radial-gradient(ellipse at 50% -10%, rgba(169,199,218,0.13), transparent 60%),
+      radial-gradient(ellipse at 50% 120%, rgba(163,42,34,0.08), transparent 55%),
       var(--bg);
-    overflow-x: hidden;
-  }
-  body::before {
-    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .5;
-    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0 1px, transparent 1px 3px);
   }
   button { font: inherit; cursor: pointer; }
-  button:focus-visible, input:focus-visible, textarea:focus-visible, label:focus-within { outline: 3px solid var(--brass); outline-offset: 3px; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, label:focus-within { outline: 3px solid var(--ice); outline-offset: 3px; }
   .screen { display: none; position: relative; z-index: 1; min-height: 100vh; }
   .screen.active { display: block; animation: fade .6s ease; }
   @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
-  /* ---------- buttons ---------- */
+  .snow { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .snow span { position: absolute; top: -2vh; border-radius: 50%; background: #fff; opacity: .55; animation: fall linear infinite; }
+  @keyframes fall { to { transform: translate(var(--drift), 106vh); } }
+
   .btn {
-    border: 1px solid var(--brass); background: transparent; color: var(--brass);
+    border: 1px solid var(--ice); background: transparent; color: var(--ice);
     padding: .65em 1.3em; border-radius: 4px; letter-spacing: .08em; text-transform: uppercase;
     font-size: .85rem; font-weight: 600; transition: background .2s, color .2s;
   }
-  .btn:hover { background: var(--brass); color: var(--bg); }
-  .btn.solid { background: var(--brass); color: var(--bg); }
-  .btn.solid:hover { background: #e0bd73; }
+  .btn:hover { background: var(--ice); color: var(--bg); }
+  .btn.solid { background: var(--ice); color: var(--bg); }
   .btn.red { border-color: var(--red); color: #fff; background: var(--red); }
-  .btn.red:hover { background: #c22d24; }
+  .btn.red:hover { background: #c0352b; }
   .btn.big { font-size: 1.05rem; padding: .9em 2.2em; }
+  .btn:disabled { opacity: .35; pointer-events: none; }
 
-  /* ---------- intro ---------- */
-  #intro { display: none; place-items: center; padding: 4vh 4vw; }
+  /* intro */
+  #intro { display: none; place-items: center; padding: 5vh 4vw; }
   #intro.active { display: grid; }
   .folder {
-    position: relative; width: min(1000px, 92vw); padding: 4.5rem 4rem 3.5rem;
-    background: linear-gradient(160deg, #cdb07a, #b8975c); color: var(--ink);
-    border-radius: 6px 6px 8px 8px; box-shadow: 0 30px 80px rgba(0,0,0,.6);
+    position: relative; width: min(1050px, 92vw); padding: 4.5rem 4rem 3.4rem;
+    background: linear-gradient(160deg, #c9b285, #b39a68); color: var(--ink);
+    border-radius: 6px 6px 8px 8px; box-shadow: 0 30px 80px rgba(0,0,0,.65);
   }
-  .folder::before {
-    content: ""; position: absolute; top: -2.2rem; left: 3rem; width: 19rem; height: 2.4rem;
-    background: #cdb07a; border-radius: 8px 8px 0 0;
-  }
-  .folder .tab-label {
-    position: absolute; top: -1.7rem; left: 4rem; font-family: var(--type); font-size: .9rem; color: var(--ink-soft);
-  }
+  .folder::before { content: ""; position: absolute; top: -2.2rem; left: 3rem; width: 27rem; height: 2.4rem; background: #c9b285; border-radius: 8px 8px 0 0; }
+  .folder .tab-label { position: absolute; top: -1.7rem; left: 4rem; font-family: var(--type); font-size: .9rem; color: var(--ink-soft); }
   .stamp {
     display: inline-block; font-family: var(--type); color: var(--red); border: 4px solid var(--red);
     padding: .25em .7em; letter-spacing: .12em; text-transform: uppercase; transform: rotate(-8deg);
@@ -79,826 +72,798 @@
   .folder .stamp { position: absolute; top: 2.2rem; right: 3rem; }
   .case-no { font-family: var(--type); font-size: 1rem; letter-spacing: .15em; color: var(--ink-soft); }
   .folder h1 { font-family: var(--serif); font-size: 4.2rem; margin: .2em 0 .1em; line-height: 1; }
-  .folder .tagline { font-family: var(--serif); font-style: italic; font-size: 1.5rem; margin: 0 0 1.6rem; color: #3b2f22; }
-  .folder .rules { font-family: var(--type); font-size: 1rem; line-height: 1.7; border-top: 1px dashed rgba(42,33,24,.4); padding-top: 1.2rem; }
+  .folder .tagline { font-family: var(--serif); font-style: italic; font-size: 1.45rem; margin: 0 0 1.5rem; color: #3b2f22; }
+  .folder .rules { font-family: var(--type); font-size: 1rem; line-height: 1.7; border-top: 1px dashed rgba(36,29,22,.4); padding-top: 1.1rem; }
   .folder .rules ol { margin: .4rem 0 0; padding-left: 1.4em; }
-  .folder .actions { margin-top: 2rem; display: flex; gap: 1rem; align-items: center; }
+  .folder .actions { margin-top: 1.8rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
   .folder .btn { border-color: var(--ink); color: var(--ink); }
   .folder .btn.solid { background: var(--ink); color: var(--paper); }
-  .folder .btn.solid:hover { background: #3d3024; }
   .folder .hint-small { font-size: .8rem; color: var(--ink-soft); font-family: var(--type); }
+  .difficulty { display: inline-flex; gap: .3rem; vertical-align: middle; margin-left: .6rem; }
+  .difficulty i { width: .8rem; height: .8rem; border-radius: 50%; background: var(--red); display: inline-block; }
 
-  /* ---------- board ---------- */
+  /* board */
   .topbar {
-    position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 1.2rem;
-    padding: 1rem 2.5vw; background: rgba(17,15,13,.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 1.1rem;
+    padding: .9rem 2.5vw; background: rgba(11,16,22,.93); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line);
   }
-  .topbar .title { font-family: var(--serif); font-size: 1.45rem; }
-  .topbar .title small { display: block; font-family: var(--type); font-size: .7rem; color: var(--brass); letter-spacing: .15em; }
+  .topbar .title { font-family: var(--serif); font-size: 1.4rem; }
+  .topbar .title small { display: block; font-family: var(--type); font-size: .7rem; color: var(--ice); letter-spacing: .15em; }
   .topbar .spacer { flex: 1; }
-  .timer { font-family: var(--type); font-size: 1.25rem; color: var(--brass); min-width: 5.5ch; text-align: right; }
-  .progress { font-family: var(--type); font-size: .85rem; color: #a99a80; }
-  .board { padding: 1.5rem 2.5vw 3rem; max-width: 1800px; margin: 0 auto; }
-  .section-label { font-family: var(--type); color: var(--brass); letter-spacing: .2em; text-transform: uppercase; font-size: .8rem; margin: 0 0 .9rem; }
-  .suspects { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-bottom: 1.8rem; }
-  .suspect {
-    display: flex; gap: 1rem; align-items: center; padding: 1rem 1.1rem; border: 1px solid var(--line);
-    border-radius: 6px; background: var(--bg2);
-  }
-  .monogram {
-    flex: none; width: 3.4rem; height: 3.4rem; border-radius: 50%; display: grid; place-items: center;
-    font-family: var(--serif); font-size: 1.3rem; color: var(--bg); background: var(--brass);
-  }
-  .suspect h3 { margin: 0; font-family: var(--serif); font-size: 1.1rem; }
-  .suspect p { margin: .2rem 0 0; font-size: .82rem; color: #b8aa90; line-height: 1.35; }
-  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.3rem 1.4rem; }
+  .timer { font-family: var(--type); font-size: 1.2rem; color: var(--ice); min-width: 5.5ch; text-align: right; }
+  .progress { font-family: var(--type); font-size: .85rem; color: #8fa3b1; }
+  .board { padding: 1.4rem 2.5vw 3rem; max-width: 1900px; margin: 0 auto; }
+  .section-label { font-family: var(--type); color: var(--ice); letter-spacing: .2em; text-transform: uppercase; font-size: .78rem; margin: 0 0 .8rem; }
+  .suspects { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; margin-bottom: 1.6rem; }
+  .suspect { display: flex; gap: .8rem; align-items: center; padding: .8rem .9rem; border: 1px solid var(--line); border-radius: 6px; background: var(--bg2); }
+  .monogram { flex: none; width: 2.8rem; height: 2.8rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--serif); font-size: 1.05rem; color: var(--bg); background: var(--ice); }
+  .suspect h3 { margin: 0; font-family: var(--serif); font-size: .98rem; line-height: 1.2; }
+  .suspect p { margin: .15rem 0 0; font-size: .76rem; color: #9fb0bd; line-height: 1.3; }
+  .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.1rem 1.2rem; }
   .card {
-    position: relative; text-align: left; border: none; padding: 1.3rem 1.2rem 1rem; min-height: 7.4rem;
-    background: var(--paper); color: var(--ink); border-radius: 3px; box-shadow: 0 10px 25px rgba(0,0,0,.45);
-    transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; gap: .35rem;
+    position: relative; text-align: left; border: none; padding: 1.1rem 1rem .9rem; min-height: 6.4rem;
+    background: var(--paper); color: var(--ink); border-radius: 3px; box-shadow: 0 10px 25px rgba(0,0,0,.5);
+    transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; gap: .25rem;
   }
-  .card:nth-child(3n) { transform: rotate(-.7deg); }
-  .card:nth-child(4n) { transform: rotate(.8deg); }
-  .card:hover, .card:focus-visible { transform: translateY(-6px) rotate(0); box-shadow: 0 18px 35px rgba(0,0,0,.55); }
-  .card::before {
-    content: ""; position: absolute; top: -.45rem; left: 50%; width: .9rem; height: .9rem; margin-left: -.45rem;
-    border-radius: 50%; background: var(--red); box-shadow: 0 2px 4px rgba(0,0,0,.5);
-  }
-  .card .num { font-family: var(--type); font-size: 1.5rem; color: var(--brass-soft); line-height: 1; }
-  .card .type { font-family: var(--type); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
-  .card .name { font-family: var(--serif); font-size: 1.08rem; font-weight: 600; line-height: 1.2; }
-  .card .seen {
-    position: absolute; right: .7rem; bottom: .7rem; font-family: var(--type); font-size: .65rem; color: #2f6b3a;
-    border: 2px solid #2f6b3a; padding: .1em .45em; transform: rotate(-6deg); opacity: 0; letter-spacing: .1em;
-  }
+  .card:nth-child(3n) { transform: rotate(-.6deg); }
+  .card:nth-child(4n) { transform: rotate(.7deg); }
+  .card:hover, .card:focus-visible { transform: translateY(-5px) rotate(0); box-shadow: 0 18px 35px rgba(0,0,0,.6); }
+  .card::before { content: ""; position: absolute; top: -.4rem; left: 50%; width: .8rem; height: .8rem; margin-left: -.4rem; border-radius: 50%; background: var(--ice-soft); box-shadow: 0 2px 4px rgba(0,0,0,.5); }
+  .card .num { font-family: var(--type); font-size: 1.25rem; color: var(--ice-soft); line-height: 1; }
+  .card .type { font-family: var(--type); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+  .card .name { font-family: var(--serif); font-size: .98rem; font-weight: 600; line-height: 1.2; }
+  .card .seen { position: absolute; right: .6rem; bottom: .55rem; font-family: var(--type); font-size: .6rem; color: #2f6b3a; border: 2px solid #2f6b3a; padding: .05em .4em; transform: rotate(-6deg); opacity: 0; letter-spacing: .1em; }
   .card.read .seen { opacity: .8; }
   .card.read { background: var(--paper-dark); }
 
-  /* ---------- modal ---------- */
-  .overlay {
-    position: fixed; inset: 0; z-index: 20; display: none; align-items: flex-start; justify-content: center;
-    background: rgba(5,4,3,.82); backdrop-filter: blur(3px); overflow-y: auto; padding: 3vh 2vw 6vh;
-  }
+  /* modal */
+  .overlay { position: fixed; inset: 0; z-index: 20; display: none; align-items: flex-start; justify-content: center; background: rgba(3,5,8,.84); backdrop-filter: blur(3px); overflow-y: auto; padding: 3vh 2vw 6vh; }
   .overlay.open { display: flex; animation: fade .25s ease; }
   .sheet {
-    position: relative; width: min(1100px, 96vw); background: var(--paper); color: var(--ink);
+    position: relative; width: min(1150px, 96vw); background: var(--paper); color: var(--ink);
     padding: 3rem 3.6rem 2.6rem; border-radius: 3px; box-shadow: 0 30px 90px rgba(0,0,0,.7);
-    font-family: var(--type); font-size: 1.08rem; line-height: 1.65;
-    background-image: linear-gradient(rgba(0,0,0,0) 97%, rgba(120,90,50,.06) 97%); background-size: 100% 1.65em;
+    font-family: var(--type); font-size: 1.05rem; line-height: 1.65;
   }
-  .sheet .close {
-    position: absolute; top: 1rem; right: 1rem; width: 2.6rem; height: 2.6rem; border-radius: 50%;
-    border: 2px solid var(--ink); background: transparent; color: var(--ink); font-size: 1.3rem; line-height: 1;
-  }
+  .sheet .close { position: absolute; top: 1rem; right: 1rem; width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 2px solid var(--ink); background: transparent; color: var(--ink); font-size: 1.3rem; line-height: 1; }
   .sheet .close:hover { background: var(--ink); color: var(--paper); }
-  .doc-head {
-    display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: .8rem; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--ink-soft); border-bottom: 2px solid var(--ink); padding-bottom: .5rem; margin-bottom: 1.4rem;
-    padding-right: 3rem;
-  }
-  .sheet h2 { font-family: var(--serif); font-size: 2.1rem; margin: 0 0 1rem; line-height: 1.15; }
-  .sheet h3 { font-family: var(--serif); font-size: 1.35rem; margin: 1.6rem 0 .6rem; }
+  .doc-head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); border-bottom: 2px solid var(--ink); padding: 0 3rem .5rem 0; margin-bottom: 1.4rem; }
+  .sheet h2 { font-family: var(--serif); font-size: 2rem; margin: 0 0 .9rem; line-height: 1.15; }
+  .sheet h3 { font-family: var(--serif); font-size: 1.3rem; margin: 1.5rem 0 .6rem; }
   .sheet p { margin: 0 0 1rem; }
   .sheet ul, .sheet ol { margin: 0 0 1rem; padding-left: 1.4em; }
   .sheet li { margin-bottom: .45rem; }
-  .sheet blockquote { margin: 0 0 1rem; padding: .2rem 0 .2rem 1.2rem; border-left: 3px solid var(--brass-soft); }
-  .sheet .note { font-style: italic; color: var(--red); border-top: 1px dashed rgba(42,33,24,.4); padding-top: .7rem; margin-top: 1.2rem; }
-  .sheet table { width: 100%; border-collapse: collapse; margin: .4rem 0 1.2rem; font-size: .95rem; }
-  .sheet th, .sheet td { border: 1px solid rgba(42,33,24,.35); padding: .5rem .7rem; text-align: left; vertical-align: top; }
-  .sheet th { background: rgba(42,33,24,.08); }
+  .sheet blockquote { margin: 0 0 1rem; padding: .2rem 0 .2rem 1.2rem; border-left: 3px solid var(--ice-soft); }
+  .sheet .note { font-style: italic; color: var(--ink-soft); border-top: 1px dashed rgba(36,29,22,.4); padding-top: .7rem; margin-top: 1.2rem; }
+  .sheet table { width: 100%; border-collapse: collapse; margin: .4rem 0 1.2rem; font-size: .93rem; }
+  .sheet th, .sheet td { border: 1px solid rgba(36,29,22,.35); padding: .45rem .65rem; text-align: left; vertical-align: top; }
+  .sheet th { background: rgba(36,29,22,.08); }
+  .sheet table.data td, .sheet table.data th { padding: .25rem .6rem; font-size: .9rem; }
+  .sheet .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
   .sheet .meta { font-size: .9rem; color: var(--ink-soft); margin-bottom: 1rem; }
-  .sheet .email { background: rgba(255,255,255,.35); padding: 1rem 1.3rem; border: 1px solid rgba(42,33,24,.25); }
-  .sheet .stamp { font-size: 1rem; position: absolute; right: 3.6rem; top: 6.4rem; }
+  .sheet .paper-box { background: rgba(255,255,255,.35); padding: 1rem 1.3rem; border: 1px solid rgba(36,29,22,.25); margin-bottom: 1rem; }
+  .sheet .burnt { background: radial-gradient(ellipse at 30% 40%, #e6d8b8 0 40%, #b89a6a 70%, #3b2a1a 100%); padding: 2rem 2.4rem; border-radius: 40% 55% 45% 60% / 50% 40% 60% 45%; color: #2a1d10; font-size: 1rem; }
+  .sheet .burnt .gone { color: transparent; text-shadow: 0 0 6px rgba(30,20,10,.65); user-select: none; }
+  .sheet .hand { font-family: 'Segoe Script', 'Bradley Hand', cursive; font-size: 1.15rem; }
+  .sheet .stamp { font-size: 1rem; position: absolute; right: 3.6rem; top: 6.2rem; }
+  .sheet svg { width: 100%; height: auto; display: block; margin: .4rem 0 1rem; }
   .sheet-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; border-top: 2px solid var(--ink); padding-top: 1.2rem; }
   .sheet .btn { border-color: var(--ink); color: var(--ink); }
   .sheet .btn:hover, .sheet .btn.solid { background: var(--ink); color: var(--paper); }
-  .sheet .btn:disabled { opacity: .3; pointer-events: none; }
 
-  textarea.notes {
-    width: 100%; min-height: 50vh; font-family: var(--type); font-size: 1.05rem; line-height: 1.65; color: var(--ink);
-    background: rgba(255,255,255,.35); border: 1px solid rgba(42,33,24,.35); padding: 1rem; resize: vertical;
-  }
-  .hint-item { border: 1px solid rgba(42,33,24,.35); padding: 1rem 1.2rem; margin-bottom: 1rem; }
+  textarea.notes { width: 100%; min-height: 55vh; font-family: var(--type); font-size: 1.05rem; line-height: 1.65; color: var(--ink); background: rgba(255,255,255,.35); border: 1px solid rgba(36,29,22,.35); padding: 1rem; resize: vertical; }
+  .hint-item { border: 1px solid rgba(36,29,22,.35); padding: 1rem 1.2rem; margin-bottom: 1rem; }
   .hint-item .hidden-text { display: none; }
   .hint-item.shown .hidden-text { display: block; margin-top: .6rem; }
   .hint-item.shown .btn { display: none; }
 
-  /* accusation */
-  .q-block { margin-bottom: 1.8rem; }
+  .q-block { margin-bottom: 1.6rem; }
   .q-block h3 { margin-top: 0; }
-  .choices { display: grid; gap: .7rem; }
-  .choices.four { grid-template-columns: repeat(4, 1fr); }
-  .choice {
-    display: flex; gap: .8rem; align-items: flex-start; border: 2px solid rgba(42,33,24,.35); padding: .8rem 1rem;
-    cursor: pointer; border-radius: 3px; background: rgba(255,255,255,.25); transition: border-color .15s, background .15s;
-  }
-  .choice input { margin-top: .35em; width: 1.1em; height: 1.1em; accent-color: var(--red); }
-  .choice:has(input:checked) { border-color: var(--red); background: rgba(168,35,27,.08); }
+  .choices { display: grid; gap: .6rem; }
+  .choices.three { grid-template-columns: repeat(3, 1fr); }
+  .choice { display: flex; gap: .8rem; align-items: flex-start; border: 2px solid rgba(36,29,22,.35); padding: .7rem .95rem; cursor: pointer; border-radius: 3px; background: rgba(255,255,255,.25); }
+  .choice input { margin-top: .35em; width: 1.1em; height: 1.1em; accent-color: var(--red); flex: none; }
+  .choice:has(input:checked) { border-color: var(--red); background: rgba(163,42,34,.08); }
   .verdict { display: none; margin-top: 1rem; padding: 1rem 1.2rem; border: 3px solid var(--red); color: var(--red); }
   .verdict.show { display: block; animation: shake .45s; }
   @keyframes shake { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-8px); } 40%,80% { transform: translateX(8px); } }
 
-  /* ---------- solved ---------- */
-  .solved-wrap { max-width: 1150px; margin: 0 auto; padding: 5vh 3vw 8vh; }
-  .solved-wrap .sheet { width: 100%; }
-  .big-stamp {
-    font-family: var(--type); color: var(--red); border: 6px double var(--red); display: inline-block; padding: .2em .6em;
-    font-size: 3rem; letter-spacing: .12em; transform: rotate(-6deg); animation: stampIn .5s cubic-bezier(.2,1.6,.4,1) both;
-  }
+  /* solved */
+  .solved-wrap { max-width: 1200px; margin: 0 auto; padding: 5vh 3vw 8vh; }
+  .solved-wrap .sheet { width: 100%; margin-bottom: 2.5rem; }
+  .big-stamp { font-family: var(--type); color: var(--red); border: 6px double var(--red); display: inline-block; padding: .2em .6em; font-size: 3rem; letter-spacing: .12em; transform: rotate(-6deg); animation: stampIn .5s cubic-bezier(.2,1.6,.4,1) both; }
   @keyframes stampIn { from { transform: scale(2.4) rotate(-6deg); opacity: 0; } to { transform: scale(1) rotate(-6deg); opacity: 1; } }
-  .solve-time { font-family: var(--type); color: var(--brass); font-size: 1.1rem; margin: 1.4rem 0 2rem; }
-  .teaser { text-align: center; margin: 3.5rem 0 1rem; }
-  .teaser p { font-family: var(--serif); font-style: italic; font-size: 1.7rem; margin: 0 0 1.4rem; }
+  .solve-time { font-family: var(--type); color: var(--ice); font-size: 1.1rem; margin: 1.4rem 0 2rem; }
+  .bonus select { font-family: var(--type); font-size: 1rem; padding: .45rem .6rem; border: 2px solid rgba(36,29,22,.4); background: rgba(255,255,255,.5); color: var(--ink); min-width: 16rem; }
+  .bonus .row { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+  .bonus .row label { flex: 1 1 22rem; }
+  .bonus .res { margin-top: .3rem; font-size: .95rem; width: 100%; }
+  .bonus .res.ok { color: #2f6b3a; }
+  .bonus .res.bad { color: var(--red); }
 
-  /* ---------- room 1125 ---------- */
-  #room { display: none; place-items: center; padding: 5vh 4vw; }
-  #room.active { display: grid; }
-  .room-inner { width: min(1500px, 94vw); text-align: center; }
-  .room-cols { display: grid; grid-template-columns: 1fr 1.15fr; gap: 3rem; align-items: center; }
-  .room-cols .envelope-scene { width: 100%; margin: 0; }
-  .room-inner h2 { font-family: var(--serif); font-size: 2.6rem; margin: 0 0 .4rem; }
-  .room-inner .sub { font-family: var(--type); color: #b8aa90; margin: 0 0 2.4rem; font-size: 1.05rem; }
-  .envelope-scene { perspective: 1200px; margin: 0 auto 2.4rem; width: min(560px, 80vw); aspect-ratio: 1.6; position: relative; }
-  .envelope { position: absolute; inset: 0; background: #d9c59b; border-radius: 4px; box-shadow: 0 25px 60px rgba(0,0,0,.6); }
-  .envelope::after {
-    content: ""; position: absolute; inset: 0; border-radius: 4px;
-    background: linear-gradient(to top right, #cbb486 50%, transparent 50.5%) left/50% 100% no-repeat,
-                linear-gradient(to top left, #cbb486 50%, transparent 50.5%) right/50% 100% no-repeat;
+  @media (max-width: 1300px) {
+    .grid { grid-template-columns: repeat(4, 1fr); }
+    .suspects { grid-template-columns: repeat(3, 1fr); }
   }
-  .flap {
-    position: absolute; left: 0; right: 0; top: 0; height: 62%; transform-origin: top; z-index: 3;
-    background: linear-gradient(to bottom, #c4ab78, #bfa572); clip-path: polygon(0 0, 100% 0, 50% 100%);
-    transition: transform 1s ease;
-  }
-  .seal {
-    position: absolute; left: 50%; top: 52%; width: 5.2rem; height: 5.2rem; margin: -2.6rem 0 0 -2.6rem; border-radius: 50%; z-index: 4;
-    background: radial-gradient(circle at 35% 35%, #c33a30, #7d1812); display: grid; place-items: center;
-    font-family: var(--serif); color: #f3d7c0; font-size: 1.6rem; box-shadow: 0 4px 10px rgba(0,0,0,.4); transition: opacity .4s;
-  }
-  .env-label { position: absolute; bottom: 9%; left: 0; right: 0; z-index: 2; font-family: var(--type); color: var(--ink); font-size: 1rem; }
-  .envelope-scene.open .flap { transform: rotateX(180deg); z-index: 1; }
-  .envelope-scene.open .seal { opacity: 0; }
-  .lock { text-align: left; background: var(--paper); color: var(--ink); padding: 2.2rem 2.6rem; border-radius: 3px; font-family: var(--type); }
-  .lock h3 { font-family: var(--serif); font-size: 1.5rem; margin: 0 0 1.2rem; }
-  .lock .field { margin-bottom: 1.3rem; }
-  .lock label { display: block; margin-bottom: .45rem; font-size: 1.08rem; }
-  .lock input[type=text] {
-    width: 100%; font-family: var(--type); font-size: 1.2rem; padding: .6rem .8rem; border: 2px solid rgba(42,33,24,.4);
-    background: rgba(255,255,255,.5); color: var(--ink); border-radius: 3px;
-  }
-  .lock .field.ok input { border-color: #2f6b3a; background: rgba(47,107,58,.08); }
-  .lock .field.bad input { border-color: var(--red); animation: shake .4s; }
-  .lock .fb { font-size: .9rem; min-height: 1.3em; margin-top: .3rem; color: var(--red); }
-  .lock .field.ok .fb { color: #2f6b3a; }
-
-  #finale { display: none; place-items: center; padding: 6vh 4vw; }
-  #finale.active { display: grid; }
-  .letter {
-    position: relative; width: min(900px, 92vw); background: #f6efdf; color: var(--ink); padding: 3.6rem 4.2rem 3.2rem;
-    box-shadow: 0 30px 90px rgba(0,0,0,.7); border-radius: 2px; animation: rise 1.2s ease both;
-  }
-  @keyframes rise { from { transform: translateY(80px); opacity: 0; } to { transform: none; opacity: 1; } }
-  .letter .who { font-family: var(--type); font-size: .95rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red); margin-bottom: 1.8rem; }
-  .letter .body { font-family: var(--serif); font-size: 1.75rem; line-height: 1.6; white-space: pre-wrap; min-height: 12em; }
-  .letter .cursor { display: inline-block; width: .08em; height: 1.1em; background: var(--ink); vertical-align: -.15em; animation: blink 1s steps(1) infinite; }
-  @keyframes blink { 50% { opacity: 0; } }
-  .letter .ps { font-family: var(--type); font-size: 1rem; color: var(--ink-soft); margin-top: 2rem; padding-right: 7.5rem; opacity: 0; transition: opacity 1.5s; }
-  .letter .ps.show { opacity: 1; }
-  .letter .turtle { position: absolute; right: 2.6rem; bottom: 2rem; width: 6rem; opacity: 0; transition: opacity 2s; }
-  .letter .turtle.show { opacity: .9; }
-  .letter .date { position: absolute; top: 2.2rem; right: 3rem; font-family: var(--type); color: var(--ink-soft); font-size: .95rem; }
-  .hearts { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-  .hearts span { position: absolute; bottom: -2rem; color: rgba(168,35,27,.45); animation: floatUp linear forwards; }
-  @keyframes floatUp { to { transform: translateY(-115vh) rotate(25deg); opacity: 0; } }
-
-  @media (max-width: 1100px) {
-    .room-cols { grid-template-columns: 1fr; gap: 2rem; }
-    .room-cols .envelope-scene { width: min(520px, 86vw); margin: 0 auto; }
-    .grid { grid-template-columns: repeat(3, 1fr); }
-    .suspects { grid-template-columns: repeat(2, 1fr); }
-    .choices.four { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 640px) {
+  @media (max-width: 800px) {
     .grid { grid-template-columns: 1fr 1fr; }
     .suspects { grid-template-columns: 1fr; }
+    .choices.three, .sheet .cols { grid-template-columns: 1fr; }
     .folder { padding: 3.5rem 1.6rem 2rem; }
     .folder h1 { font-size: 2.6rem; }
-    .sheet { padding: 2.6rem 1.3rem 1.6rem; }
-    .letter { padding: 3rem 1.6rem 2rem; }
-    .letter .body { font-size: 1.3rem; }
+    .sheet { padding: 2.6rem 1.2rem 1.6rem; }
     .topbar { flex-wrap: wrap; }
   }
 </style>
 </head>
 <body>
+<div class="snow" id="snow"></div>
 
-<!-- ================= INTRO ================= -->
+<!-- INTRO -->
 <section id="intro" class="screen active" aria-label="Kezdőképernyő">
   <div class="folder">
-    <span class="tab-label">BRFK · Emberölési osztály</span>
+    <span class="tab-label">Mátrai Rendőrkapitányság · Bűnügyi osztály</span>
     <span class="stamp">Szigorúan bizalmas</span>
-    <div class="case-no">ÜGYSZÁM: 1125/2026</div>
-    <h1>Az Aranyhíd-ügy</h1>
-    <p class="tagline">Két nyomozó. Egy éjszaka. Egy halott szállodatulajdonos.</p>
+    <div class="case-no">ÜGYSZÁM: 2912/2026</div>
+    <h1>A Hóvár-ügy</h1>
+    <p class="tagline">Hóvihar. Elzárt kúria. Hét ember, egy halott, és szinte mindenki hazudik.</p>
     <div class="rules">
-      <strong>Eligazítás</strong>
+      <strong>Eligazítás</strong> <span class="difficulty" title="Nehézség"><i></i><i></i><i></i><i></i><i></i></span>
       <ol>
-        <li>Olvassátok el a nyomozati anyagot, bármilyen sorrendben. Kezdjétek az ügyindító jelentéssel.</li>
-        <li>Derítsétek ki, <strong>ki</strong> ölte meg Halmos Viktort, <strong>miért</strong>, és <strong>hogyan</strong> jutott fel és le a 12. emeletről.</li>
-        <li>Nem minden részlet tartozik a gyilkossághoz. Ami furcsa, azt írjátok fel a jegyzetekbe.</li>
-        <li>Csak akkor emeljetek vádat, ha mindketten biztosak vagytok benne.</li>
+        <li>23 dokumentum, köztük alaprajz, naplók, laborleletek és hat kihallgatás. Bármilyen sorrendben olvashatjátok őket.</li>
+        <li>Nem minden hazugság a gyilkosság miatt hangzik el. Aki hazudik, még nem biztos, hogy gyilkos.</li>
+        <li>A vádiratban öt kérdésre kell válaszolni: ki, mikor, hogyan jutott be, mivel ölt, és miért. Az ügyész csak akkor fogadja el, ha mind az öt stimmel.</li>
+        <li>A segítségek ezúttal szűkszavúak. Jegyzeteljetek!</li>
       </ol>
     </div>
     <div class="actions">
       <button class="btn solid big" id="startBtn">Akta megnyitása</button>
-      <span class="hint-small">Kb. 90 perc · töltsetek egy pohár bort</span>
+      <span class="hint-small">Kb. 2–3 óra · papír és toll ajánlott</span>
     </div>
   </div>
 </section>
 
-<!-- ================= BOARD ================= -->
+<!-- BOARD -->
 <section id="board" class="screen" aria-label="Bizonyítéktábla">
   <header class="topbar">
-    <div class="title"><small>ÜGYSZÁM 1125/2026</small>Az Aranyhíd-ügy</div>
-    <span class="progress" id="progress">0 / 15 átnézve</span>
+    <div class="title"><small>ÜGYSZÁM 2912/2026</small>A Hóvár-ügy</div>
+    <span class="progress" id="progress"></span>
     <div class="spacer"></div>
-    <span class="timer" id="timer" title="Eltelt idő">00:00</span>
+    <span class="timer" id="timer">00:00</span>
     <button class="btn" id="notesBtn">Jegyzetek</button>
     <button class="btn" id="hintsBtn">Segítség</button>
     <button class="btn red" id="accuseBtn">Vádemelés</button>
   </header>
   <main class="board">
-    <p class="section-label">A gyanúsítottak</p>
+    <p class="section-label">Akik az éjszakát a kúriában töltötték</p>
     <div class="suspects" id="suspects"></div>
     <p class="section-label">A nyomozati anyag</p>
     <div class="grid" id="grid"></div>
   </main>
 </section>
 
-<!-- ================= SOLVED ================= -->
+<!-- SOLVED -->
 <section id="solved" class="screen" aria-label="Megoldás">
   <div class="solved-wrap">
     <div class="big-stamp">ÜGY LEZÁRVA</div>
     <div class="solve-time" id="solveTime"></div>
     <article class="sheet" id="solutionSheet"></article>
-    <div class="teaser">
-      <p>Egy rejtély azonban megoldatlan maradt…</p>
-      <button class="btn solid big" id="toRoomBtn">Ki lakik az 1125-ös szobában?</button>
-    </div>
+    <article class="sheet bonus" id="bonusSheet"></article>
   </div>
 </section>
 
-<!-- ================= ROOM 1125 ================= -->
-<section id="room" class="screen" aria-label="Az 1125-ös szoba">
-  <div class="room-inner">
-    <h2>Az 1125-ös szoba</h2>
-    <p class="sub">Vendégek: „M. &amp; P.” · Érkezés: november 24., 23:40 · A recepción egy lezárt borítékot hagytak.</p>
-    <div class="room-cols">
-    <div class="envelope-scene" id="envScene">
-      <div class="envelope"></div>
-      <div class="flap"></div>
-      <div class="seal">M</div>
-      <div class="env-label">P.-nek · csak a nyomozás lezárása után</div>
-    </div>
-    <form class="lock" id="lockForm" autocomplete="off">
-      <h3>A borítékot csak az nyithatja ki, aki tudja a választ.</h3>
-      <div class="field" data-q="1">
-        <label for="a1">1. Mit ittunk az első randinkon?</label>
-        <input type="text" id="a1">
-        <div class="fb"></div>
-      </div>
-      <div class="field" data-q="2">
-        <label for="a2">2. Hova akart mindenképpen eljutni a bátyám Horvátországban?</label>
-        <input type="text" id="a2">
-        <div class="fb"></div>
-      </div>
-      <div class="field" data-q="3">
-        <label for="a3">3. Mit láttunk Zakynthoson, amit annyira szerettél?</label>
-        <input type="text" id="a3">
-        <div class="fb"></div>
-      </div>
-      <button class="btn solid big" type="submit" style="border-color:var(--ink);background:var(--ink);color:var(--paper)">Boríték felbontása</button>
-    </form>
-    </div>
-  </div>
-</section>
-
-<!-- ================= FINALE ================= -->
-<section id="finale" class="screen" aria-label="Üzenet">
-  <div class="hearts" id="hearts"></div>
-  <div class="letter">
-    <div class="date">2026. november 25.</div>
-    <div class="who">Az 1125-ös szoba vendégei: Miki és Petra</div>
-    <div class="body" id="letterBody"></div>
-    <div class="ps" id="letterPs">
-      U.i.: A bérelt quadról továbbra sem tudnak a szüleink.<br>
-      U.i. 2: Ígérem, megpróbálok kevesebbet pacsálni a vizet. Próbálom.
-    </div>
-    <svg class="turtle" id="turtle" viewBox="0 0 120 80" aria-hidden="true">
-      <ellipse cx="60" cy="44" rx="34" ry="24" fill="#6b8f5a"/>
-      <path d="M38 44 Q60 18 82 44 Q60 66 38 44Z" fill="#87a873"/>
-      <path d="M60 22 V66 M44 34 L76 54 M76 34 L44 54" stroke="#56764a" stroke-width="2" fill="none"/>
-      <circle cx="102" cy="38" r="10" fill="#7d9e6b"/>
-      <circle cx="105" cy="35" r="1.8" fill="#2a2118"/>
-      <ellipse cx="34" cy="64" rx="9" ry="5" fill="#7d9e6b"/>
-      <ellipse cx="84" cy="66" rx="9" ry="5" fill="#7d9e6b"/>
-      <ellipse cx="36" cy="24" rx="8" ry="4.5" fill="#7d9e6b"/>
-      <ellipse cx="84" cy="22" rx="8" ry="4.5" fill="#7d9e6b"/>
-      <path d="M26 46 L16 48 L26 50Z" fill="#7d9e6b"/>
-    </svg>
-  </div>
-</section>
-
-<!-- ================= MODAL ================= -->
-<div class="overlay" id="overlay" role="dialog" aria-modal="true">
-  <article class="sheet" id="sheet"></article>
-</div>
+<div class="overlay" id="overlay" role="dialog" aria-modal="true"><article class="sheet" id="sheet"></article></div>
 
 <script>
 (() => {
   'use strict';
-
-  /* ---------------- storage (safe) ---------------- */
   const store = {
-    get(k, d) { try { const v = localStorage.getItem('aranyhid:' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
-    set(k, v) { try { localStorage.setItem('aranyhid:' + k, JSON.stringify(v)); } catch (e) { /* ignore */ } }
+    get(k, d) { try { const v = localStorage.getItem('hovar:' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem('hovar:' + k, JSON.stringify(v)); } catch (e) {} }
   };
 
-  /* ---------------- data ---------------- */
+  /* ================= DATA ================= */
   const suspects = [
-    { mono: 'HK', name: 'Halmos Krisztina', info: '41 · az áldozat felesége. Az este veszekedtek.' },
-    { mono: 'BÁ', name: 'Bencze Áron', info: '52 · a szálloda igazgatója 15 éve. Az eladás után mehetett volna.' },
-    { mono: 'LD', name: 'Lukács Dóra', info: '29 · személyi asszisztens. Mindenről tudott.' },
-    { mono: 'SzG', name: 'Szántó Gergely', info: '34 · unokaöcs, az 1124-es szobában szállt meg.' }
+    { mono: 'VE', name: 'dr. Vámos Eszter', info: '44 · Henrik lánya, belgyógyász' },
+    { mono: 'VB', name: 'Vámos Bálint', info: '47 · Henrik fia, vállalkozó' },
+    { mono: 'KR', name: 'Vámosné Kiss Réka', info: '42 · Bálint felesége' },
+    { mono: 'SzM', name: 'dr. Szalay Márton', info: '58 · Henrik ügyvédje és barátja' },
+    { mono: 'PL', name: 'Pintér Lili', info: '31 · Henrik ápolója fél éve' },
+    { mono: 'KN', name: 'Kertész Nóra', info: '63 · házvezetőnő 25 éve' }
   ];
+
+  const floorPlan = `
+  <svg viewBox="0 0 900 470" role="img" aria-label="Földszint alaprajza" font-family="Special Elite, Courier New, monospace">
+    <text x="20" y="16" font-size="15" fill="#241d16">FÖLDSZINT</text>
+    <g fill="none" stroke="#241d16" stroke-width="3">
+      <rect x="20" y="30" width="860" height="410"/>
+      <line x1="20" y1="180" x2="880" y2="180"/><line x1="20" y1="240" x2="880" y2="240"/>
+      <line x1="220" y1="30" x2="220" y2="180"/><line x1="330" y1="30" x2="330" y2="180"/><line x1="520" y1="30" x2="520" y2="180"/><line x1="700" y1="30" x2="700" y2="180"/>
+      <line x1="300" y1="240" x2="300" y2="440"/><line x1="480" y1="240" x2="480" y2="440"/><line x1="580" y1="240" x2="580" y2="440"/><line x1="760" y1="240" x2="760" y2="440"/>
+    </g>
+    <g stroke="#b58a3c" stroke-width="7">
+      <line x1="95" y1="180" x2="135" y2="180"/>
+      <line x1="220" y1="88" x2="220" y2="122"/>
+      <line x1="330" y1="88" x2="330" y2="122"/>
+      <line x1="405" y1="180" x2="445" y2="180"/>
+      <line x1="590" y1="180" x2="630" y2="180"/>
+      <line x1="770" y1="180" x2="810" y2="180"/>
+      <line x1="880" y1="70" x2="880" y2="104"/>
+      <line x1="140" y1="240" x2="180" y2="240"/>
+      <line x1="370" y1="240" x2="410" y2="240"/>
+      <line x1="370" y1="440" x2="410" y2="440"/>
+      <line x1="510" y1="240" x2="550" y2="240"/>
+      <line x1="650" y1="240" x2="690" y2="240"/>
+      <line x1="800" y1="240" x2="840" y2="240"/>
+    </g>
+    <g stroke="#5d7f96" stroke-width="5"><line x1="70" y1="30" x2="170" y2="30"/></g>
+    <rect x="720" y="120" width="70" height="44" fill="none" stroke="#241d16" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <g fill="#241d16" font-size="15" text-anchor="middle">
+      <text x="120" y="100">KÖNYVTÁR</text>
+      <text x="275" y="95" font-size="12">DOHÁNY-</text><text x="275" y="110" font-size="12">ZÓSZOBA</text>
+      <text x="425" y="105">BILIÁRDTEREM</text>
+      <text x="610" y="105">EBÉDLŐ</text>
+      <text x="790" y="70">KONYHA</text>
+      <text x="755" y="140" font-size="10.5">pince-</text><text x="755" y="153" font-size="10.5">lépcső</text>
+      <text x="450" y="216">FOLYOSÓ / HALL</text>
+      <text x="160" y="340">SZALON</text>
+      <text x="390" y="330">ELŐTÉR</text><text x="390" y="350" font-size="11">lépcső az emeletre</text>
+      <text x="530" y="340" font-size="13">KAMRA</text>
+      <text x="670" y="330" font-size="13">KERTÉSZ NÓRA</text><text x="670" y="348" font-size="13">LAKRÉSZE</text>
+      <text x="820" y="340" font-size="12">MOSÓ-</text><text x="820" y="355" font-size="12">KONYHA</text>
+      <text x="120" y="50" font-size="10.5" fill="#3f5f74">ablak (terasz felé)</text>
+      <text x="855" y="128" font-size="10.5" transform="rotate(-90 862 128)">oldalajtó</text>
+      <text x="390" y="462" font-size="11">főbejárat</text>
+    </g>
+  </svg>
+  <svg viewBox="0 0 900 270" role="img" aria-label="Emelet alaprajza" font-family="Special Elite, Courier New, monospace">
+    <text x="20" y="16" font-size="15" fill="#241d16">EMELET</text>
+    <g fill="none" stroke="#241d16" stroke-width="3">
+      <rect x="20" y="30" width="860" height="220"/>
+      <line x1="20" y1="150" x2="880" y2="150"/><line x1="20" y1="195" x2="880" y2="195"/>
+      <line x1="175" y1="30" x2="175" y2="150"/><line x1="330" y1="30" x2="330" y2="150"/><line x1="560" y1="30" x2="560" y2="150"/><line x1="720" y1="30" x2="720" y2="150"/>
+      <line x1="330" y1="195" x2="330" y2="250"/><line x1="560" y1="195" x2="560" y2="250"/>
+    </g>
+    <g stroke="#b58a3c" stroke-width="7">
+      <line x1="80" y1="150" x2="115" y2="150"/><line x1="235" y1="150" x2="270" y2="150"/><line x1="425" y1="150" x2="465" y2="150"/>
+      <line x1="620" y1="150" x2="655" y2="150"/><line x1="780" y1="150" x2="815" y2="150"/>
+      <line x1="155" y1="195" x2="190" y2="195"/><line x1="700" y1="195" x2="735" y2="195"/>
+    </g>
+    <g fill="#241d16" text-anchor="middle" font-size="13">
+      <text x="97" y="80">SÁRGA SZOBA</text><text x="97" y="100" font-size="11.5">dr. Vámos Eszter</text>
+      <text x="252" y="80">KIS SZOBA</text><text x="252" y="100" font-size="11.5">Pintér Lili</text>
+      <text x="445" y="80">HENRIK</text><text x="445" y="98">HÁLÓSZOBÁJA</text>
+      <text x="640" y="80">KÉK SZOBA</text><text x="640" y="100" font-size="11.5">Bálint és Réka</text>
+      <text x="800" y="80">ZÖLD SZOBA</text><text x="800" y="100" font-size="11.5">dr. Szalay Márton</text>
+      <text x="450" y="178">FOLYOSÓ</text>
+      <text x="175" y="228" font-size="12">NYUGATI FÜRDŐ</text>
+      <text x="445" y="228" font-size="12">LÉPCSŐ (le az előtérbe)</text>
+      <text x="720" y="228" font-size="12">KELETI KÖZÖS FÜRDŐ</text>
+      <text x="97" y="135" font-size="10.5" fill="#594b3b">kandalló</text><text x="640" y="135" font-size="10.5" fill="#594b3b">kandalló</text><text x="800" y="135" font-size="10.5" fill="#594b3b">kandalló</text>
+    </g>
+  </svg>`;
+
+  const pulseRows = [
+    ['20:30', 74], ['20:40', 73], ['20:45', 72], ['20:50', 74], ['21:00', 75], ['21:10', 76], ['21:15', 94], ['21:20', 103],
+    ['21:25', 99], ['21:30', 97], ['21:35', 81], ['21:40', 76], ['21:45', 90], ['21:50', 95], ['21:55', 92], ['22:00', 84],
+    ['22:05', 71], ['22:10', 63], ['22:15', 57], ['22:20', 52], ['22:22', 53], ['22:24', 118], ['22:25', 131], ['22:26', 124],
+    ['22:27', 96], ['22:28', 41], ['22:29', 0], ['22:30', 0], ['22:45', 0], ['23:00', 0]
+  ];
+  const half = Math.ceil(pulseRows.length / 2);
+  const pulseTable = rows => `<table class="data"><tr><th>Időbélyeg</th><th>Pulzus (ütés/perc)</th></tr>${rows.map(([t, v]) => `<tr><td>2026-12-29T${t}:00Z</td><td>${v}</td></tr>`).join('')}</table>`;
 
   const docs = [
     { type: 'Jelentés', title: 'Ügyindító jelentés', html: `
       <h2>Ügyindító jelentés</h2>
-      <p class="meta">Budapesti Rendőr-főkapitányság · Emberi élet elleni bűncselekmények osztálya</p>
+      <p class="meta">Mátrai Rendőrkapitányság · Bűnügyi osztály</p>
       <span class="stamp">Szigorúan bizalmas</span>
-      <p>2026. november 25-én, 07:10-kor Varga Ilona szobalány holtan találta <strong>Halmos Viktort</strong> (58), az <strong>Aranyhíd Grand Hotel</strong> tulajdonosát a szálloda 12. emeletén lévő irodájában (1201). Az áldozat tarkóját több, tömör tárggyal mért ütés érte. A helyszínen erőszakos behatolásnak nem volt nyoma.</p>
-      <p>A 12. emelet csak különleges belépőkártyával érhető el a lifttel. A lépcsőházi vészkijárat a 12. emeletről csak <strong>kifelé</strong> nyitható. A 12. emeleti folyosó biztonsági kamerája egy hete hibás.</p>
-      <p>Az áldozat az este folyamán több ismerősének is elmondta, hogy <strong>eladja a szállodát</strong> egy nemzetközi láncnak, és <strong>módosítja a végrendeletét</strong>.</p>
-      <h3>A gyanúsítottak</h3>
+      <p>2026. december 30-án 07:35-kor Kertész Nóra házvezetőnő holtan találta Vámos Henriket (71), a Hóvár-kúria tulajdonosát, a kúria könyvtárszobájában. A kúria a december 29-i hóvihar miatt elzárva volt, az utat a hóeke 30-án 12:10-kor nyitotta meg. A rendőrség 12:40-kor ért a helyszínre.</p>
+      <p>A háziak a halált természetesnek vélték: dr. Vámos Eszter reggel szívmegállást állapított meg. A boncolás ezt nem erősítette meg.</p>
+      <p>Vámos Henrik borbirtokos, a Vámos Alapítvány alapítója. Szívbeteg volt, fél éve ápoló gondozta.</p>
+      <h3>Az éjszakát a kúriában töltötték</h3>
       <table>
-        <tr><th>Név</th><th>Kor</th><th>Kapcsolat</th><th>Miért gyanús?</th></tr>
-        <tr><td><strong>Halmos Krisztina</strong></td><td>41</td><td>Felesége (második házasság)</td><td>Az új végrendelet az ő részét is csökkentette volna. Az este veszekedtek.</td></tr>
-        <tr><td><strong>Bencze Áron</strong></td><td>52</td><td>A szálloda igazgatója, 15 éve</td><td>Az eladás után elvesztette volna az állását. Az ő kártyáját használták a liftben.</td></tr>
-        <tr><td><strong>Lukács Dóra</strong></td><td>29</td><td>Személyi asszisztens</td><td>Mindenről tudott. Hallotta, hogy le akarják cserélni.</td></tr>
-        <tr><td><strong>Szántó Gergely</strong></td><td>34</td><td>Unokaöccse</td><td>Pénzt kért a nagybátyjától. A szállodában, az 1124-es szobában szállt meg.</td></tr>
+        <tr><th>Név</th><th>Kor</th><th>Kapcsolat</th></tr>
+        <tr><td>dr. Vámos Eszter</td><td>44</td><td>az áldozat lánya, belgyógyász</td></tr>
+        <tr><td>Vámos Bálint</td><td>47</td><td>az áldozat fia, vállalkozó</td></tr>
+        <tr><td>Vámosné Kiss Réka</td><td>42</td><td>Bálint felesége</td></tr>
+        <tr><td>dr. Szalay Márton</td><td>58</td><td>az áldozat ügyvédje, a Vámos Alapítvány jogi képviselője, 40 éves barát</td></tr>
+        <tr><td>Pintér Lili</td><td>31</td><td>az áldozat ápolója</td></tr>
+        <tr><td>Kertész Nóra</td><td>63</td><td>házvezetőnő</td></tr>
       </table>
-      <p><strong>Feladat:</strong> azonosítsák a tettest, az indítékot és az elkövetés módját.</p>` },
+      <h3>A december 29-i vacsorán elhangzottak</h3>
+      <p>A jelenlévők egybehangzó elmondása szerint Vámos Henrik a desszertnél felállt, és ezt mondta:</p>
+      <blockquote>„Holnap aláírom az új végrendeletemet. Lesz, akit meglep. Holnap egy régi barátomnak is kellemetlen napja lesz. Januárban pedig elmondok valamit, ami megváltoztatja ezt a családot.”</blockquote>
+      <p>A vacsora 19:30-tól 21:00-ig tartott. Utána a férfiak a dohányzóba, a nők a szalonba vonultak.</p>
+      <p><strong>Feladat:</strong> azonosítsák a tettest, a halál idejét, a tettes útját, az elkövetés módját és az indítékot.</p>` },
 
-    { type: 'Jelentés', title: 'Helyszíni szemle (iroda, 1201)', html: `
-      <h2>Helyszíni szemle jegyzőkönyve</h2>
-      <p class="meta">Helyszín: Aranyhíd Grand Hotel, 12. emelet, iroda (1201) · 2026. november 25., 07:40</p>
+    { type: 'Térkép', title: 'A kúria alaprajza', html: `
+      <h2>A Hóvár-kúria alaprajza</h2>
+      <p class="meta">Rendőrségi vázlat · az aranyszínű jelölések ajtók, a kék vonal ablak</p>
+      ${floorPlan}
       <ul>
-        <li>Az áldozat az íróasztal mellett fekszik, arccal a padlón, háttal az ajtónak.</li>
-        <li><strong>Elkövetési eszköz:</strong> egy kb. 3 kg-os bronz oroszlánszobor, amely állandóan az íróasztalon állt. A padlón találták az áldozat mellett, gondosan letörölve, ujjlenyomat nincs rajta.</li>
-        <li>Az áldozat karórájának üvege az eséstől betört, a mutatók <strong>22:47</strong>-nél álltak meg.</li>
-        <li>Az asztalon egy whiskyspohár az áldozat ujjlenyomataival és egy félig üres üveg.</li>
-        <li>Az asztali jegyzettömb legfelső lapján, az áldozat kézírásával: <strong>„G. – NEM. Utoljára mondom.”</strong></li>
-        <li>A széf zárva és érintetlen, a pénztárca és a telefon a helyén van. Rablás kizárható.</li>
-        <li>Az ajtó csukva, de nem zárva. Az ablak zárva.</li>
-        <li>A szőnyegen, az ajtó közelében: néhány <strong>sötétszürke pamutszál</strong>, valószínűleg pulóverből. Az áldozaton sötétkék öltöny volt.</li>
+        <li>A dohányzószobának nincs folyosói ajtaja.</li>
+        <li>A könyvtár folyosói ajtaja zárható. Egyetlen kulcsa van, amit belül, a zárban tartanak. A könyvtár és a dohányzó közötti összekötő ajtó nem zárható.</li>
+        <li>A pince (borospince és generátorhelyiség) csak a konyhai pincelépcsőn közelíthető meg.</li>
+        <li>A Zöld, a Kék és a Sárga szobában működő kandalló van.</li>
       </ul>` },
 
-    { type: 'Jelentés', title: 'Orvosszakértői jelentés', html: `
-      <h2>Igazságügyi orvosszakértői előzetes jelentés</h2>
-      <p class="meta">Vizsgált személy: Halmos Viktor (58)</p>
+    { type: 'Jelentés', title: 'Helyszíni szemle: könyvtár', html: `
+      <h2>Helyszíni szemle: könyvtár</h2>
+      <p class="meta">2026. december 30., 13:10</p>
       <ul>
-        <li><strong>Halál oka:</strong> koponyatörés, két ütés tömör tárggyal.</li>
-        <li><strong>Halál ideje:</strong> 2026. november 24., 22:15 és 23:00 között. A karóra 22:47-es állása ezzel összeegyeztethető.</li>
-        <li>Az ütések a fej <strong>jobb hátsó részét</strong> érték, felülről, az áldozat mögül. Ez alapján az elkövető nagy valószínűséggel <strong>balkezes</strong>.</li>
-        <li>Védekezésre utaló sérülés nincs. Az áldozat nem számított támadásra: hátat fordított valakinek, akit ismert.</li>
-        <li>Véralkoholszint: enyhe ittasság.</li>
+        <li>Az áldozat a kandalló melletti karosszékben ül, feje oldalra billent. Házikabátot és papucsot visel. A bal csuklóján pulzusmérő óra (CardioBand S3).</li>
+        <li>A kandallóban a tűz kialudt. Az északi ablak résnyire nyitva, a helyiség hőmérséklete 9 °C.</li>
+        <li>A folyosói ajtó belülről zárva, a kulcs a zárban. Kertész Nóra reggel a biliárdtermen és a dohányzón keresztül jutott be.</li>
+        <li>A karosszéken egy bordó bársony díszpárna. Huzatán nyálnyom, illata erős férfikölni, fás-füves jellegű.</li>
+        <li>Az íróasztalon határidőnapló (lásd: 11), töltőtoll, az olvasólámpa ég. Iratmappa nincs a helyiségben.</li>
+        <li>A kisasztalon teás termosz, nagyjából félig. A csésze nem a kisasztalon van, hanem a bárpult tálcáján: elmosva, szájával lefelé.</li>
+        <li>A bárpulton whiskysüveg és két kristálypohár, tisztán, használatlanul.</li>
+        <li>A hamutálban két szivarvég (Cohiba). Az áldozat ilyen szivart szívott.</li>
+        <li>A rádió bekapcsolt állapotban, a Bartók Rádió szól. A készülék típusa áramkimaradás után automatikusan újraindul.</li>
       </ul>` },
 
-    { type: 'Napló', title: 'Beléptetőrendszer naplója', html: `
-      <h2>Beléptetőrendszer naplója</h2>
-      <p class="meta">Aranyhíd Grand Hotel · 2026. november 24.</p>
-      <p>Minden emelet csak kártyával érhető el a liftből. A rendszer azt is rögzíti, melyik emeletről hívták a liftet.</p>
-      <table>
-        <tr><th>Idő</th><th>Kártya</th><th>Esemény</th></tr>
-        <tr><td>18:02</td><td>Halmos Viktor</td><td>Lift: földszint → 12. emelet</td></tr>
-        <tr><td>21:28</td><td>Halmos Krisztina</td><td>Lift: földszint → 12. emelet</td></tr>
-        <tr><td>21:41</td><td>Halmos Krisztina</td><td>Lift: 12. emelet → −1. szint (wellness)</td></tr>
-        <tr><td>21:43</td><td>Lukács Dóra</td><td>Személyzeti kijárat, kilépés</td></tr>
-        <tr><td>21:55</td><td>Halmos Krisztina</td><td>Wellness, belépés</td></tr>
-        <tr><td>22:12</td><td>Szántó Gergely</td><td>Lift: földszint → 11. emelet</td></tr>
-        <tr><td>22:38</td><td>Bencze Áron</td><td>Lift: <strong>11. emelet</strong> → 12. emelet</td></tr>
-        <tr><td>22:52</td><td>–</td><td>12. emeleti vészkijárat nyitása (belülről)</td></tr>
-        <tr><td>22:53</td><td>–</td><td>11. emeleti lépcsőházi ajtó nyitása</td></tr>
-        <tr><td>23:20</td><td>Halmos Krisztina</td><td>Wellness, kilépés</td></tr>
-        <tr><td>23:24</td><td>Halmos Krisztina</td><td>Lift: −1. szint → 12. emelet</td></tr>
-      </table>` },
-
-    { type: 'Napló', title: 'Vendégnyilvántartás, 11. emelet', html: `
-      <h2>Recepció: vendégnyilvántartás</h2>
-      <p class="meta">11. emelet (részlet) · 2026. november 24.</p>
-      <table>
-        <tr><th>Szoba</th><th>Vendég</th><th>Érkezés</th><th>Megjegyzés</th></tr>
-        <tr><td>1110</td><td>Marko Babić + 3 fő</td><td>nov. 23.</td><td>Horvát baráti társaság. „Hangosak, figyelni rájuk.”</td></tr>
-        <tr><td>1123</td><td>–</td><td>–</td><td>Üres (felújítás miatt lezárva)</td></tr>
-        <tr><td>1124</td><td>Szántó Gergely</td><td>nov. 22.</td><td>A tulajdonos rokona, a szobát a tulajdonos fizeti. Kifizetetlen bárszámla: 186 000 Ft</td></tr>
-        <tr><td>1125</td><td>M. &amp; P.</td><td><strong>nov. 24., 23:40</strong></td><td>Késő járattal érkeztek. „Évfordulós csomag – 2 év. Kérés: csendes szoba, sok ásványvíz, extra törölköző.” Csomagcímke: ZTH. A recepción egy lezárt borítékot hagytak: „P.-nek. Csak a nyomozás lezárása után.”</td></tr>
-        <tr><td>1126</td><td>–</td><td>–</td><td>Üres</td></tr>
-      </table>` },
-
-    { type: 'Kihallgatás', title: 'Halmos Krisztina', html: `
-      <h2>Kihallgatás: Halmos Krisztina</h2>
-      <p class="meta">Az áldozat felesége · 2026. november 25., 09:30</p>
-      <blockquote>
-        <p>„21:30 körül felmentem Viktorhoz az irodába. Igen, veszekedtünk. Közölte, hogy eladja a hotelt és új végrendeletet ír, mert szerinte mindenki túl kényelmes lett mellette. Én is.</p>
-        <p>Utána lementem a wellnessbe lenyugodni. Szauna, aztán a pihenőben teáztam. Tizenegy után jöttem fel a lakásunkba, az 1202-be. Az iroda ajtaja alatt kiszűrődött a fény, de nem zavartam. Gyakran éjfélig dolgozik, és haragudtam rá.</p>
-        <p>Gergely? Viktor hetente kapott tőle könyörgő üzeneteket, mindig pénzt kér. Áron pedig gyűlölte az eladás gondolatát.”</p>
-      </blockquote>
-      <p class="note">Kihallgatói megjegyzés: a jegyzőkönyvet bal kézzel írta alá.</p>` },
-
-    { type: 'Kihallgatás', title: 'Bencze Áron', html: `
-      <h2>Kihallgatás: Bencze Áron</h2>
-      <p class="meta">A szálloda igazgatója · 2026. november 25., 10:15</p>
-      <blockquote>
-        <p>„Fél tíztől a bárban ültem. A zakómat a mellettem lévő bárszékre tettem, abban volt a belépőkártyám is. Valamivel tíz óra után kimentem a mosdóba pár percre.</p>
-        <p>22:25 körül felhívott egy londoni ügyvéd az eladás ügyében. A bárban hangos volt a zene, ezért kimentem a főbejárat elé. Tizenegy előtt tíz perccel jöttem vissza, a zakó ott volt, ahol hagytam. A kártyát csak reggel kerestem, és nem találtam.</p>
-        <p>Az eladásnak nem örültem, 15 évet adtam ennek a helynek. A könyvelési eltérések adminisztratív hibák. A 12. emeleti kamerát bejelentettem, a javítás jövő hétre volt ütemezve.</p>
-        <p>Gergely mellettem ült a bárban, elég részeg volt. Mire visszajöttem a mosdóból, már el is ment.”</p>
-      </blockquote>
-      <p class="note">Kihallgatói megjegyzés: a jegyzőkönyvet jobb kézzel írta alá.</p>` },
-
-    { type: 'Kihallgatás', title: 'Lukács Dóra', html: `
-      <h2>Kihallgatás: Lukács Dóra</h2>
-      <p class="meta">Személyi asszisztens · 2026. november 25., 11:00</p>
-      <blockquote>
-        <p>„21:43-kor a személyzeti kijáraton távoztam, és taxival mentem haza Újbudára. 22:20-tól kb. 23:15-ig videóhívásban voltam a nővéremmel, aki Torontóban él.</p>
-        <p>Igen, tudtam, hogy Halmos úr új asszisztenst keres. Rosszul esett, de nem haragudtam rá. Hozok egy e-mailt, amit tegnap délután küldött az ügyvédjének, engem is betett másolatba.</p>
-        <p>Gergely tegnap délután is itt volt az irodában és kiabált. Utána Halmos úr azt mondta: ‚Ennyi volt, többet nem kap tőlem egy fillért sem.’ Áron könyvelésében pedig tényleg voltak furcsa tételek, Halmos úr is gyanakodott.”</p>
-      </blockquote>
-      <p class="note">Kihallgatói megjegyzés: a jegyzőkönyvet jobb kézzel írta alá.</p>` },
-
-    { type: 'Kihallgatás', title: 'Szántó Gergely', html: `
-      <h2>Kihallgatás: Szántó Gergely</h2>
-      <p class="meta">Az áldozat unokaöccse · 2026. november 25., 12:30</p>
-      <blockquote>
-        <p>„A nagybátyámmal jóban voltunk. Pénz? Nem, nincsenek anyagi gondjaim, ezt honnan veszik?</p>
-        <p>Tíz óra után felmentem a szobámba, és ruhástul bedőltem az ágyba. Egész éjjel ki sem mozdultam.</p>
-        <p>Be is tudom bizonyítani! Valamikor fél tizenegy és tizenegy között felébredtem, mert a szomszéd szobában valaki álmában beszélt. Valami teknősökről hadovált, meg hogy ‚ne pacsáld már a vizet’. Annyira röhejes volt, hogy ezért emlékszem rá. Szóval a szobámban voltam.</p>
-        <p>Áron zakója? Fogalmam sincs, miről beszélnek, semmilyen kártyához nem nyúltam.”</p>
-      </blockquote>
-      <p class="note">Kihallgatói megjegyzés: sötétszürke kapucnis pulóverben jelent meg. Ideges volt, többször kérte, hogy fejezzük be. A jegyzőkönyvet bal kézzel írta alá.</p>` },
-
-    { type: 'Tanúvallomás', title: 'Kovács Bence, bárpultos', html: `
-      <h2>Tanúvallomás: Kovács Bence</h2>
-      <p class="meta">Bárpultos, Aranyhíd Bár · 2026. november 25., 13:20</p>
-      <blockquote>
-        <p>„Bencze úr fél tíztől ült a pultnál, a zakóját a mellette lévő székre tette. A zakó másik oldalán Szántó úr ült, aki már fél kilenc óta ivott. Hangos volt, telefonon veszekedett valakivel: ‚Laci, meglesz, esküszöm!’</p>
-        <p>Tíz óra 5 perc körül Bencze úr kiment a mosdóba. Szántó úr ekkor fizetés nélkül felkelt, áthajolt a zakó fölött, azt hittem, csak megtámaszkodik, mert alig állt a lábán. Aztán elindult a lift felé. Bencze úr nemsokára visszajött, fél tizenegy előtt kiment telefonálni, és tizenegy előtt tíz perccel jött vissza.</p>
-        <p>Furcsa egy este volt. Tudják, ebben a szakmában az ember sok mindent lát. Két éve novemberben itt ült egy fiatal pár a sarokasztalnál egész este, és csak vizet ittak. Mondtam is a kollégámnak, hogy ezek vagy sportolók, vagy nagyon komolyan gondolják. A lánynak piros és bedagadt volt a füle egy frissen lőtt piercingtől, folyton hozzányúlt, a fiú meg szólt neki, hogy ne piszkálja. Aztán elmentek sétálni a rakpartra. Fogadni mertem volna, hogy ott csókolóztak először. Na mindegy, ez nem tartozik ide.”</p>
-      </blockquote>` },
-
-    { type: 'Tanúvallomás', title: 'Tóth István, portás', html: `
-      <h2>Tanúvallomás: Tóth István</h2>
-      <p class="meta">Portás, főbejárat · 2026. november 25., 14:00</p>
-      <blockquote>
-        <p>„Fél tizenegy előtt néhány perccel Bencze igazgató úr kijött a főbejárat elé, és angolul telefonált. Egészen tizenegy előtt tíz percig járkált fel-alá, végig láttam, egyszer sem jött be. Szóltam is neki, hogy meg fog fázni zakó nélkül ebben a hidegben.</p>
-        <p>Fél tizenkettő után néhány perccel taxival megérkezett egy fiatal pár a reptérről. A fiú bőröndjén egy kis teknősös kulcstartó lógott. A lány azt mondta neki: ‚Itt legalább nem kell titokban quadot bérelni.’ Mindketten nagyon nevettek. Nem értettem, mi olyan vicces.”</p>
-      </blockquote>` },
-
-    { type: 'Tanúvallomás', title: 'Marko Babić, vendég', html: `
-      <h2>Tanúvallomás: Marko Babić</h2>
-      <p class="meta">Vendég, 1110-es szoba · tolmács útján rögzítve · 2026. november 25., 15:10</p>
-      <blockquote>
-        <p>„Kb. 22:50 és 23:00 között a barátaimmal a 11. emeleti folyosón voltunk. Le akartunk menni a hotel klubjába, mert ott latinest volt. Ivan nem akart jönni, én meg kiabáltam neki, hogy ‚Menjünk már latinestre!’ Elnézést, kicsit hangosak voltunk.</p>
-        <p>Ekkor kinyílt a lépcsőház ajtaja, és kijött egy férfi sötétszürke kapucnis pulóverben, a kapucni a fején. Nagyon sietett, ránk se nézett. A folyosó vége felé ment, az 1120-as szobák felé, aztán hallottam, hogy becsapódik egy ajtó. Az arcát nem láttam. Ivan szerint egy kártya volt a kezében.”</p>
-      </blockquote>` },
-
-    { type: 'Napló', title: 'Takarítói napló', html: `
-      <h2>Takarítói napló</h2>
-      <p class="meta">Varga Ilona, szobalány · 2026. november 25., reggel</p>
-      <table>
-        <tr><th>Idő</th><th>Hely</th><th>Bejegyzés</th></tr>
-        <tr><td>06:40</td><td>11. em., szemetes az 1124 mellett</td><td>Egy hotelkártya „B. Á. – IGAZGATÓ” felirattal. Leadtam a recepción.</td></tr>
-        <tr><td>06:45</td><td>1110</td><td>A folyosón üres sörösdobozok. Megint.</td></tr>
-        <tr><td>06:50</td><td>1125</td><td>„Ne zavarjanak” tábla. Este extra törölközőt kértek, mert a vendég szerint „valaki úgy pacsálja a vizet, hogy minden úszik”. Délután viszem.</td></tr>
-        <tr><td>07:10</td><td>12. em., iroda (1201)</td><td>Felvittem Halmos úrnak a reggeli kávét. Riasztottam a recepciót.</td></tr>
-      </table>` },
-
-    { type: 'Bizonylat', title: 'Telefonadatok és bizonylatok', html: `
-      <h2>Telefonadatok és bizonylatok</h2>
-      <p class="meta">Szolgáltatói adatok és csatolt bizonylatok · 2026. november 24.</p>
+    { type: 'Jelentés', title: 'Helyszíni szemle: dohányzó, biliárdterem, folyosó', html: `
+      <h2>Helyszíni szemle: dohányzó, biliárdterem, folyosó, ebédlő</h2>
+      <p class="meta">2026. december 30., 13:40</p>
+      <h3>Dohányzószoba</h3>
       <ul>
-        <li><strong>Bencze Áron:</strong> bejövő hívás egy londoni (+44) számról, 22:24:51 – 22:49:30.</li>
-        <li><strong>Lukács Dóra:</strong> videóhívás egy kanadai számmal, 22:19 – 23:14. Taxiszámla: indulás 21:47, érkezés Újbudára 22:06.</li>
-        <li><strong>Halmos Krisztina:</strong> wellness bár, blokk: 1 gyömbéres tea, 22:44, aláírás: H. K. A wellness munkatársa szerint 22:40 és 23:00 között többször látta a pihenőben.</li>
-        <li><strong>Szántó Gergely</strong>, üzenetváltás a „Laci” nevű kontakttal:
-          <ul>
-            <li>nov. 21., 19:02, Laci: „Csütörtökig a 4 milla. Nem kérem még egyszer.”</li>
-            <li>nov. 24., 16:15, Laci: „Hallom, a nagybácsi nemet mondott. Nem az én bajom. Csütörtök.”</li>
-            <li>nov. 24., 23:58, Gergely: „Megoldottam. Hamarosan lesz pénzem.”</li>
-          </ul>
-        </li>
+        <li>A hamutálban egy félig elszívott, hirtelen elnyomott szivarka, „Café Crème” típus.</li>
+        <li>Az összekötő ajtó a könyvtár felé csukva. Gyertya, viasz nincs.</li>
+      </ul>
+      <h3>Biliárdterem</h3>
+      <ul>
+        <li>Az asztalon a golyók háromszögben, rendezve. A dákók a falitartóban.</li>
+        <li>A krétás pontszámtáblán a „dec. 27., Bálint–Márton 3:2” bejegyzés áll, más nincs.</li>
+        <li>Gyertya, gyertyatartó, viaszcsepp nincs a helyiségben.</li>
+      </ul>
+      <h3>Folyosó</h3>
+      <ul>
+        <li>A könyvtár folyosói ajtaja előtt hat piros viaszcsepp, egy kis körben a küszöb előtt. A könyvtáron belül viasz nincs.</li>
+      </ul>
+      <h3>Ebédlő</h3>
+      <ul>
+        <li>Az ötágú kandeláberben öt fehér gyertya. A kanócok fehérek, a gyertyákat még sosem gyújtották meg.</li>
       </ul>` },
 
-    { type: 'E-mail', title: 'Halmos Viktor e-mailje', html: `
-      <h2>Halmos Viktor e-mailje</h2>
-      <p class="meta">Átadta: Lukács Dóra</p>
-      <div class="email">
-        <p><strong>Feladó:</strong> Halmos Viktor<br><strong>Címzett:</strong> dr. Fekete Gábor ügyvéd<br><strong>Másolat:</strong> Lukács Dóra<br><strong>Időpont:</strong> 2026. november 24., 15:52<br><strong>Tárgy:</strong> Végrendelet módosítása – SÜRGŐS</p>
-        <p>Gábor!</p>
-        <p>Ahogy megbeszéltük, csütörtökön (nov. 26.) aláírom az új végrendeletet. Gergely teljesen kikerül belőle: ma délután megint pénzt követelt, nemet mondtam, és ezt tartom. Krisztina része a házassági szerződés szerinti minimumra csökken. Az eladásból befolyó összeg nagyobb része alapítványba kerül. Áronnak a szerződés szerinti végkielégítés jár, a könyvelési ügyet külön vizsgáltatom.</p>
-        <p>Üdv, Viktor</p>
-      </div>` }
+    { type: 'Jelentés', title: 'Igazságügyi orvosszakértői jelentés', html: `
+      <h2>Igazságügyi orvosszakértői jelentés (előzetes)</h2>
+      <p class="meta">Vizsgált személy: Vámos Henrik (71)</p>
+      <ul>
+        <li>Halál oka: fulladás. Az arcbőrön és a kötőhártyán pontszerű bevérzések, az orrnyílásban bordó bársonyszálak.</li>
+        <li>A halál ideje: a helyiség lehűlése (nyitott ablak, kialudt tűz) miatt a testhőmérséklet alapján csak tág időablak adható meg: 2026. december 29., 22:30 és december 30., 01:30 között.</li>
+        <li>Az áldozat körmei alatt idegen bőrszövet: a tettes valószínűleg megsérült a dulakodásban. A DNS-vizsgálat eredménye három hét múlva várható.</li>
+        <li>Az ismert szívbetegség nem okozója a halálnak.</li>
+        <li>A vérben altatószer (lásd: 06).</li>
+      </ul>` },
+
+    { type: 'Labor', title: 'Toxikológiai vizsgálat', html: `
+      <h2>Toxikológiai vizsgálat</h2>
+      <p class="meta">Igazságügyi Toxikológiai Laboratórium · sürgősségi eljárás</p>
+      <ul>
+        <li>Vér: zolpidem (altatószer) a szokásos adagnál magasabb koncentrációban. Önmagában nem halálos, de erős tompultságot, mély álmosságot okoz, a védekezőképesség jelentősen csökken.</li>
+        <li>A zolpidem hatása jellemzően 15–30 perccel a bevétel után jelentkezik.</li>
+        <li>A termoszban maradt tea: zolpidem nem mutatható ki.</li>
+        <li>A csésze elmosva, vizsgálatra alkalmatlan.</li>
+        <li>Gyomortartalom: tea, kevés süteménymaradvány.</li>
+        <li>Az áldozat rendszeres gyógyszerei között altató nem szerepel (lásd: 08).</li>
+      </ul>` },
+
+    { type: 'Adat', title: 'Pulzusmérő óra adatexportja', html: `
+      <h2>CardioBand S3 – adatexport</h2>
+      <div class="paper-box">Eszköz: CardioBand S3 · Felhasználó: Vámos Henrik<br>Exportálva: 2026-12-30T12:55:03Z (rendőrségi kérésre)<br>Időzóna: UTC (koordinált világidő)<br>Mintavétel: 5 perc, eseménynél 1 perc · 0 = nincs érzékelhető jel</div>
+      <div class="cols">${pulseTable(pulseRows.slice(0, half))}${pulseTable(pulseRows.slice(half))}</div>` },
+
+    { type: 'Napló', title: 'Ápolási napló (Pintér Lili)', html: `
+      <h2>Ápolási napló</h2>
+      <p class="meta">Páciens: Vámos Henrik · vezeti: Pintér Lili · 2026. december 29.</p>
+      <table>
+        <tr><th>Idő</th><th>Bejegyzés</th></tr>
+        <tr><td>08:00</td><td>Reggeli gyógyszerek beadva. Vérnyomás 142/88, pulzus 70.</td></tr>
+        <tr><td>13:10</td><td>Ebéd után pihen. Kéri, hogy délután ne zavarjuk. Sokat telefonál.</td></tr>
+        <tr><td>17:30</td><td>Kérés: holnap 10:00-ra hívjam fel neki dr. Halász Juditot (ügyvédi iroda, Eger), és kapcsoljam a könyvtárba.</td></tr>
+        <tr><td>21:45</td><td>Esti gyógyszerek beadva a könyvtárban (szív, vérnyomás). Pulzus az óráról leolvasva: 72. Fáradt, de nyugodt. Altatót nem kap, nem is kért.</td></tr>
+      </table>
+      <p class="note">Az óra adatai a telefonos alkalmazáson keresztül szinkronizálódnak.</p>` },
+
+    { type: 'Napló', title: 'Generátor vezérlőnaplója', html: `
+      <h2>Szükségáramforrás vezérlőnaplója</h2>
+      <p class="meta">Generátorhelyiség, pince · helyi idő · 2026. december 29–30.</p>
+      <table>
+        <tr><th>Idő</th><th>Esemény</th></tr>
+        <tr><td>23:12:07</td><td>Hálózati feszültség megszűnt</td></tr>
+        <tr><td>23:12:37</td><td>Automatikus indítás: SIKERTELEN (akkumulátor feszültsége alacsony)</td></tr>
+        <tr><td>23:19:44</td><td>Kézi indítás: SIKERTELEN</td></tr>
+        <tr><td>23:27:12</td><td>Kézi indítás: SIKERTELEN</td></tr>
+        <tr><td>23:34:50</td><td>Kézi indítás: SIKERTELEN</td></tr>
+        <tr><td>23:41:03</td><td>Kézi indítás: SIKERES · generátoros üzem</td></tr>
+        <tr><td>02:15:40</td><td>Hálózati feszültség helyreállt · visszaállás hálózatra</td></tr>
+      </table>
+      <p class="note">Kézi indítás csak a generátorhelyiség vezérlőpultján lehetséges.</p>` },
+
+    { type: 'Napló', title: 'Házvezetői feljegyzések', html: `
+      <h2>Kertész Nóra feljegyzései</h2>
+      <p class="meta">Háztartási füzet, kiegészítve a rendőrség kérdéseire adott válaszokkal</p>
+      <ul>
+        <li>Gyertyák a kamrában, dec. 29. reggel: 3 fehér, 2 piros. Dec. 30. délben: 2 fehér, 1 piros.</li>
+        <li>Az ebédlő kandeláberébe dec. 28-án tettem öt új fehér gyertyát.</li>
+        <li>A dohányzó hamutálait minden este 22:30-kor ürítem ki, amikor az urak végeztek. Dec. 29-én is így volt.</li>
+        <li>Henrik úr esti teája: 22:00, termosz és egy csésze. A csészét mindig én mosom el reggel. Henrik úr soha nem mosogat el semmit.</li>
+        <li>Henrik úr télen soha nem nyit ablakot.</li>
+        <li>Henrik úr soha nem zárja be a könyvtárat.</li>
+        <li>Pince, dec. 30. délután, rendőri kérésre: az 1947-es Tokaji Eszenciából hat palack helyett négy van. Dec. 28-án még hat volt.</li>
+      </ul>` },
+
+    { type: 'Bűnjel', title: 'Henrik határidőnaplója', html: `
+      <h2>Vámos Henrik határidőnaplója</h2>
+      <p class="meta">Az íróasztalon, nyitva · két oldal</p>
+      <div class="paper-box hand">
+        <p><u>December 29., kedd</u></p>
+        <p>Bálint – NEM. Elég volt.</p>
+        <p>L. – jan. 1. Elmondani mindenkinek. Megérdemli.</p>
+        <p>Sz. M. 22:45 – kék mappa.</p>
+      </div>
+      <div class="paper-box hand">
+        <p><u>December 30., szerda</u></p>
+        <p>10:00 Halász J. (telefon) – alapítvány</p>
+        <p>11:00 Aláírás</p>
+        <p>Könyvelő?? (Eszter ismer valakit?)</p>
+        <p>Ha nincs magyarázat → rendőrség.</p>
+      </div>` },
+
+    { type: 'Bűnjel', title: 'Végrendelet-tervezet', html: `
+      <h2>Végrendelet-tervezet (részlet)</h2>
+      <p class="meta">Dr. Szalay Márton aktatáskájából · készült 2026. december 20-án, aláírásra előkészítve dec. 30-ra</p>
+      <div class="paper-box">
+        <p>1. Pintér Lilit, akit ezennel lányomként elismerek, hagyatékom egyharmada illeti.</p>
+        <p>2. Dr. Vámos Esztert és Vámos Bálintot hagyatékom egy-egy harmada illeti.</p>
+        <p>3. Vámos Bálint részére 2024 óta nyújtott kölcsönöket örökrészébe be kell számítani.</p>
+        <p>4. Kertész Nóra a kapusházat élete végéig díjmentesen használhatja.</p>
+        <p>5. Végrendeleti végrehajtónak dr. Szalay Mártont nevezem ki.</p>
+      </div>
+      <p class="note">Rendőrségi megjegyzés: a hatályos, 2019-es végrendelet szerint a hagyaték Eszter és Bálint között fele-fele arányban oszlik meg. Kertész Nóra kapusházra vonatkozó joga abban is szerepel.</p>` },
+
+    { type: 'Jelentés', title: 'A szobák átvizsgálása', html: `
+      <h2>A szobák átvizsgálása</h2>
+      <p class="meta">2026. december 30., 15:00–17:30</p>
+      <h3>Kék szoba (Vámos Bálint, Vámosné Kiss Réka)</h3>
+      <ul>
+        <li>Bálint holmija: cigaretta (Marlboro), autókulcs, egy bank fizetési felszólítása 38,5 millió Ft lejárt tartozásról. Illatszer nincs.</li>
+        <li>Réka holmija: kozmetikumok, telefontöltő.</li>
+      </ul>
+      <h3>Keleti közös fürdő (a Kék és a Zöld szobához tartozik)</h3>
+      <ul><li>A tükrös szekrényben Vámosné Kiss Réka nevére kiállított altató (zolpidem), kiváltva dec. 20-án. A dobozban jóval kevesebb tabletta van, mint amennyi Réka elmondása szerint (esténként egy) maradnia kellene.</li></ul>
+      <h3>Zöld szoba (dr. Szalay Márton)</h3>
+      <ul>
+        <li>Café Crème szivarkák (bontott doboz), kölni „Vetiver” felirattal, aktatáska a végrendelet-tervezettel (lásd: 12).</li>
+        <li>A kandallóban friss hamu, benne egy részben égett papírdarab (lásd: 16).</li>
+        <li>Az éjjeliszekrényen egy női hajcsat. Vámosné Kiss Réka a sajátjaként azonosította.</li>
+      </ul>
+      <h3>Sárga szoba (dr. Vámos Eszter)</h3>
+      <ul><li>Orvosi táska. Tartalma a mellékelt jegyzék szerint hiánytalan, altatót nem tartalmaz.</li></ul>
+      <h3>Kis szoba (Pintér Lili)</h3>
+      <ul><li>Ápolói felszerelés, gyógyszeradagoló. A fiókban egy laboratóriumi levél (lásd: 17).</li></ul>
+      <h3>Kertész Nóra lakrésze</h3>
+      <ul><li>Kulcscsomó a ház összes helyiségének pótkulcsával, a könyvtár kivételével.</li></ul>
+      <h3>Henrik hálószobája</h3>
+      <ul><li>Levendulás arcszesz, szívgyógyszerek. Rendkívüli nincs.</li></ul>` },
+
+    { type: 'Jelentés', title: 'A jelenlévők szemrevételezése', html: `
+      <h2>A jelenlévők szemrevételezése</h2>
+      <p class="meta">2026. december 30., 14:00 · látható sérülések</p>
+      <table>
+        <tr><th>Név</th><th>Észlelés</th><th>Elmondása szerint</th></tr>
+        <tr><td>dr. Vámos Eszter</td><td>Sérülés nincs.</td><td>–</td></tr>
+        <tr><td>Vámos Bálint</td><td>Friss horzsolás a jobb kézfején.</td><td>„Beütöttem egy ajtóba.”</td></tr>
+        <tr><td>Vámosné Kiss Réka</td><td>Sérülés nincs.</td><td>–</td></tr>
+        <tr><td>dr. Szalay Márton</td><td>Friss, vékony karcolás a bal csuklóján.</td><td>„A biliárdasztal fémszegélyébe akadtam.”</td></tr>
+        <tr><td>Pintér Lili</td><td>Kis égési folt a bal hüvelykujján.</td><td>„Gyertyagyújtáskor.”</td></tr>
+        <tr><td>Kertész Nóra</td><td>Gépolaj nyomai a kezén és a kötényén.</td><td>„A generátor.”</td></tr>
+      </table>
+      <p class="note">A biliárdasztal szegélye fából készült, fém díszítés nincs rajta.</p>` },
+
+    { type: 'Jelentés', title: 'Külső helyszín: hó és parkoló', html: `
+      <h2>Külső helyszín: hónyomok, parkoló</h2>
+      <p class="meta">2026. december 30., 12:50</p>
+      <ul>
+        <li>Az Országos Meteorológiai Szolgálat szerint erős havazás december 29-én 18:00-tól december 30-án 01:30-ig.</li>
+        <li>A friss hóban egyetlen nyomsor: a konyhai oldalajtótól a parkolóig és vissza, Vámos Bálint autójáig (fekete Audi). A nyomokat részben belepte a hó; becslés szerint éjfél és 01:30 között készültek.</li>
+        <li>A ház körül máshol érintetlen a hó, a könyvtár ablaka alatt és a teraszon is. Külső behatolás kizárható.</li>
+        <li>Az Audi csomagtartójában, pokrócba csavarva két palack 1947-es Tokaji Eszencia. A csomagtartó fedelének éle jeges, éles.</li>
+      </ul>` },
+
+    { type: 'Bűnjel', title: 'Égett papírdarab', html: `
+      <h2>Bűnjel: részben égett papírdarab</h2>
+      <p class="meta">Lelőhely: a Zöld szoba kandallója · rekonstruált szöveg</p>
+      <div class="burnt">
+        <p><span class="gone">VÁ</span>MOS HENRIK ALAPÍTV<span class="gone">ÁNY</span> · számlakivonat · 2026. <span class="gone">nov</span>ember</p>
+        <p><span class="gone">xxxxxx</span> 11.14. · átutalás · 4 800 000 Ft · kedvezményezett: Szalay é<span class="gone">s Társa</span> Ügyvédi Ir<span class="gone">oda</span></p>
+        <p><span class="gone">xxxxxx</span> 11.30. · átutalás · 6 200 000 Ft · közlemény: „jogi tanácsadás – <span class="gone">xxxxxxx</span>”</p>
+        <p><span class="gone">xxxxxxxx</span> (kézírással a margón:) <span class="hand">„Milyen tanácsadás??”</span></p>
+      </div>` },
+
+    { type: 'Bűnjel', title: 'Laboratóriumi levél', html: `
+      <h2>GenoLab Kft. – eredményközlő levél</h2>
+      <p class="meta">Pintér Lili fiókjából</p>
+      <div class="paper-box">
+        <p>Tárgy: Biológiai rokonsági vizsgálat eredménye</p>
+        <p>Megrendelő: Pintér Lili · Kelt: 2026. november 12.</p>
+        <p>„A” minta: Pintér Lili (szájnyálkahártya-kenet)<br>„B” minta: a megrendelő által beküldött hajminta, megjelölés: „V. H. – fésű”</p>
+        <p>Eredmény: a „B” minta szolgáltatójának biológiai apasága az „A” minta szolgáltatójához képest 99,98% valószínűséggel fennáll.</p>
+      </div>` },
+
+    { type: 'Kihallgatás', title: 'dr. Vámos Eszter', html: `
+      <h2>Kihallgatás: dr. Vámos Eszter</h2>
+      <p class="meta">2026. december 30., 14:30</p>
+      <blockquote>
+        <p>„Vacsora után a szalonban voltunk Rékával és Lilivel. Tíz után Réka felment, később azt mondta, lement a biliárdterembe. Fél tizenegy körül hallottam, hogy Bálint kiabál apával a könyvtárban. Ez nálunk nem újdonság.</p>
+        <p>Tizenegy után Lilivel kimentünk a konyhába teát főzni. Nem sokkal később elment az áram. Nóra rögtön lement a pincébe a generátorhoz, és csak háromnegyed tizenkettő körül jött fel. Mi a kamrából hoztunk gyertyát, én egy fehéret, Lili egy pirosat.</p>
+        <p>Pár perc múlva Lili fogta a gyertyáját, hogy megnézi apát, nem ijedt-e meg a sötétben. Öt-hat perc múlva jött vissza. Azt mondta, a könyvtár zárva van, apa biztos alszik, és hogy Bálint és Réka megint veszekednek a biliárdteremben. Onnantól együtt voltunk a konyhában, amíg vissza nem jött az áram, aztán még beszélgettünk. Éjfél után feküdtem le.</p>
+        <p>Reggel Nóra kiabálására ébredtem. Apa szívbeteg volt, azt hittem, a szíve állt meg, és ezt is mondtam. A boncolást feleslegesnek tartottam. Tévedtem.</p>
+        <p>Apa pár napja megkérdezte, ismerek-e megbízható könyvelőt, aki átnézne valamit az alapítványnál. Nem mondta, mit.”</p>
+      </blockquote>` },
+
+    { type: 'Kihallgatás', title: 'Vámos Bálint', html: `
+      <h2>Kihallgatás: Vámos Bálint</h2>
+      <p class="meta">2026. december 30., 15:10</p>
+      <blockquote>
+        <p>„Igen, vitatkoztunk apával, negyed tizenegy körül mentem be hozzá. Pénzt kértem, nemet mondott. Nem titok, nehéz évem volt. Fél tizenegy után eljöttem, becsaptam az ajtót, nem vagyok rá büszke. Teát nem ittam, nem is kínált.</p>
+        <p>Felmentem, mondtam Rékának, hogy lefekszem. Ő lement. Elaludtam. Arra ébredtem, hogy sötét van, és Réka nincs sehol. A telefonom lámpájával lementem, és a biliárdteremben találtam, egyedül ült a sötétben. Azt mondta, Márton gyertyáért ment. Se gyertyát nem láttam, se Mártont.</p>
+        <p>Összevesztünk. Mostanában furcsa, folyton telefonál, és Márton körül legyeskedik. Jó negyedóráig ott veszekedtünk, aztán felmentünk, és a lépcsőn jött vissza az áram. Onnantól reggelig aludtam, ki sem mozdultam.</p>
+        <p>A kezem? Beütöttem egy ajtóba. A Tokaji? Fogalmam sincs, miről beszélnek.”</p>
+      </blockquote>` },
+
+    { type: 'Kihallgatás', title: 'Vámosné Kiss Réka', html: `
+      <h2>Kihallgatás: Vámosné Kiss Réka</h2>
+      <p class="meta">2026. december 30., 15:50</p>
+      <blockquote>
+        <p>„Vacsora után a szalonban voltam, tíz után felmentem. Bálint mondta, hogy lefekszik, én nem tudtam aludni, ezért lementem a biliárdterembe. Tizenegy körül Márton is bejött, Henriktől jött. Biliárdoztunk.</p>
+        <p>Amikor elment az áram, Márton hozott gyertyát az ebédlőből, és utána végig együtt voltunk, éjfél után negyedig. Aztán felmentem. Bálint aludt, ő nem jött le.</p>
+        <p>Az altató az enyém, esténként egyet beveszek. Nem tudom, hogyan fogyhatott el ennyi. A közös fürdőben tartom, bárki hozzáférhet.</p>
+        <p>Márton a család régi barátja, semmi több.”</p>
+      </blockquote>` },
+
+    { type: 'Kihallgatás', title: 'dr. Szalay Márton', html: `
+      <h2>Kihallgatás: dr. Szalay Márton</h2>
+      <p class="meta">2026. december 30., 16:30</p>
+      <blockquote>
+        <p>„Henrik háromnegyed tizenegyre hívott a könyvtárba. A holnapi aláírásról beszéltünk, a tervezetet én készítettem. Henrik fáradt volt, remegett a keze, ezért én töltöttem neki teát. Kék mappa? Nem emlékszem ilyenre.</p>
+        <p>Tizenegy után pár perccel eljöttem, és átmentem a biliárdterembe, ahol Réka volt. Játszottunk. Amikor elment az áram, gyertyát hoztam az ebédlőből, és onnantól együtt voltunk Rékával, éjfél után negyedig. Utána lefeküdtem.</p>
+        <p>A dohányzóban aznap este vacsora után jártam utoljára. A csuklóm? A biliárdasztal szegélye.</p>
+        <p>Henrik negyven évig a barátom volt. Az alapítvány pénzügyei rendben vannak, a könyveléssel kapcsolatos kérdésekre szívesen válaszolok, ha az iratok visszakerülnek az irodámba.”</p>
+      </blockquote>` },
+
+    { type: 'Kihallgatás', title: 'Pintér Lili', html: `
+      <h2>Kihallgatás: Pintér Lili</h2>
+      <p class="meta">2026. december 30., 17:10</p>
+      <blockquote>
+        <p>„Háromnegyed tízkor beadtam Henrik úr esti gyógyszereit a könyvtárban. Fáradt volt, de nyugodt, azt mondta, holnap fontos nap lesz. Altatót nem kap.</p>
+        <p>Utána a szalonban voltam, aztán Eszterrel a konyhában. Az áramszünet alatt végig együtt voltunk a konyhában, gyertyát gyújtottunk. A hüvelykujjamat akkor égettem meg.</p>
+        <p>Henrik úr nagyon jó ember volt hozzám.</p>
+        <p>A levél a fiókomban magánügy. Nem kívánok róla beszélni.”</p>
+      </blockquote>` },
+
+    { type: 'Kihallgatás', title: 'Kertész Nóra', html: `
+      <h2>Kihallgatás: Kertész Nóra</h2>
+      <p class="meta">2026. december 30., 13:30</p>
+      <blockquote>
+        <p>„Tízkor bevittem a teát, ahogy mindig, és töltöttem neki egy csészével. Henrik úr megkért, szóljak Szalay úrnak, hogy háromnegyed tizenegyre jöjjön be hozzá. Az íróasztalon nyitva volt egy kék mappa, de nem néztem bele.</p>
+        <p>Fél tizenegykor kiürítettem a dohányzó hamutálait. A könyvtárból Bálint úr kiabált. Tizenegy után pár perccel láttam, hogy Szalay úr kijön a könyvtárból, és bemegy a biliárdterembe.</p>
+        <p>Aztán elment az áram. Lementem a pincébe a generátorhoz, de nem akart elindulni, háromnegyed tizenkettőkor sikerült. Feljöttem, a lányok a konyhában ültek gyertyánál.</p>
+        <p>Éjfél után húsz perccel végigmentem a folyosón. A könyvtár ajtaja alatt kiszűrődött a fény, szólt a rádió. Henrik úr gyakran elalszik mellette, nem zavartam.</p>
+        <p>Reggel fél nyolckor vittem a kávét. Az ajtó zárva volt, a kulcs belül. A biliárdtermen és a dohányzón át mentem be. Henrik úr a fotelben… Az ablak nyitva volt. A díszpárnának idegen illata volt, valamelyik vendég úr kölnije. A csészét pedig valaki elmosta, és fejjel lefelé tette a tálcára. Én sosem teszem így.”</p>
+      </blockquote>` }
   ];
 
   const hints = [
-    'Nézzétek meg, kinek a kártyájával mentek fel a 12. emeletre, és <strong>honnan</strong>. Hol volt ekkor a kártya gazdája?',
-    'Kinek az alibije múlik egy szomszédon? Mikor érkezett meg az a szomszéd?',
-    'Hasonlítsátok össze az orvosszakértői jelentést a kihallgatások végén lévő megjegyzésekkel.'
+    'Ebben a házban szinte mindenki hazudik, de nem mindenki a gyilkosság miatt. Minden hazugság mögé keressetek egy saját okot.',
+    'Az óra pontos, csak nem a ti időtök szerint jár. Vessétek össze egy olyan bejegyzéssel, amely ugyanazt a pulzust rögzíti.',
+    'Ha megvan a pontos időpont: kinek van rá olyan tanúja vagy gépi naplója, amelyik nem hazudik? Az alaprajz megmutatja, honnan lehetett bejutni, ha a főajtó zárva volt.',
+    'Kövessétek a gyertyákat, a hamut és az illatot.'
   ];
 
-  const accusation = {
-    who: { correct: 'g', options: [['k', 'Halmos Krisztina'], ['a', 'Bencze Áron'], ['d', 'Lukács Dóra'], ['g', 'Szántó Gergely']] },
-    why: { correct: 'debt', options: [
-      ['revenge', 'Bosszú, amiért le akarták cserélni.'],
-      ['embezzle', 'Így akarta eltitkolni a sikkasztást.'],
-      ['debt', 'Szerencsejáték-adósság, és meg akarta előzni, hogy csütörtökön kizárják a végrendeletből.'],
-      ['jealous', 'Féltékenység és a házassági szerződés.']
-    ] },
-    how: { correct: 'card', options: [
-      ['own', 'A saját kártyájával ment fel a lifttel, és a lifttel is jött le.'],
-      ['card', 'A bárban kivette Bencze Áron kártyáját a zakóból, azzal ment fel a 11. emeletről, és a lépcsőn jött le.'],
-      ['hide', 'A veszekedés óta az emeleten bujkált, és megvárta, amíg mindenki elmegy.'],
-      ['staff', 'Egy takarítói kártyával a személyzeti lifttel ment fel és le.']
-    ] }
-  };
+  const Q = [
+    { key: 'who', title: '1. Ki ölte meg Vámos Henriket?', cls: 'three', correct: 'marton', options: [
+      ['eszter', 'dr. Vámos Eszter'], ['balint', 'Vámos Bálint'], ['reka', 'Vámosné Kiss Réka'],
+      ['marton', 'dr. Szalay Márton'], ['lili', 'Pintér Lili'], ['nora', 'Kertész Nóra']] },
+    { key: 'when', title: '2. Mikor halt meg Henrik?', cls: 'three', correct: '2329', options: [
+      ['2229', '22:29 körül'], ['2308', '23:08 körül'], ['2329', '23:29 körül'],
+      ['0020', '00:20 körül'], ['0045', '00:45 körül'], ['0130', '01:30 körül']] },
+    { key: 'route', title: '3. Hogyan jutott be a tettes a könyvtárba közvetlenül a gyilkosság előtt?', cls: '', correct: 'smoking', options: [
+      ['door', 'A folyosói ajtón, amit Henrik nyitott ki neki.'],
+      ['smoking', 'A biliárdtermen és a dohányzón át, az összekötő ajtón.'],
+      ['window', 'A terasz felől, az ablakon át.'],
+      ['key', 'A folyosói ajtón, pótkulccsal.']] },
+    { key: 'method', title: '4. Hogyan ölték meg?', cls: '', correct: 'smother', options: [
+      ['digoxin', 'A szívgyógyszerét adagolták túl.'],
+      ['sleep', 'Halálos adag altatót kapott a teájában.'],
+      ['smother', 'Az altatóval elkábított Henriket a díszpárnával megfojtották.'],
+      ['cold', 'Elaltatták, és nyitott ablaknál kihűlt.']] },
+    { key: 'why', title: '5. Mi volt az indíték?', cls: '', correct: 'fraud', options: [
+      ['money', 'Az örökség: az új végrendelet aláírása előtt kellett meghalnia.'],
+      ['fraud', 'Henrik rájött az alapítványtól való sikkasztásra, és másnap lépni akart.'],
+      ['secret', 'Henrik januárban felfedte volna a tettes titkát.'],
+      ['love', 'Féltékenység és egy titkos viszony.'],
+      ['wine', 'Henrik rájött a pincei lopásra.']] }
+  ];
 
   const solutionHTML = `
-    <div class="doc-head"><span>BRFK · Ügyszám 1125/2026</span><span>Zárójelentés</span></div>
-    <h2>A tettes: Szántó Gergely</h2>
-    <p><strong>Indíték:</strong> 4 milliós szerencsejáték-adósság. Ráadásul a nagybátyja csütörtökön kizárta volna a végrendeletből. Ha Viktor az aláírás előtt meghal, a régi végrendelet marad érvényben, és Gergely örököl.</p>
-    <p><strong>Módszer:</strong> a bárban kivette Áron kártyáját a zakóból, felment a szobájába, és kapucnis pulóvert vett. A 11. emeletről Áron kártyájával ment fel a 12.-re, és még egyszer pénzt kért. Amikor Viktor nemet mondott és hátat fordított, leütötte a bronz oroszlánnal. A lépcsőn jött le, a kártyát kidobta a szobája melletti szemetesbe, alibinek pedig kitalálta a szomszéd álombeszédét.</p>
-    <h3>A bizonyítéki lánc</h3>
+    <div class="doc-head"><span>Mátrai Rendőrkapitányság · Ügyszám 2912/2026</span><span>Zárójelentés</span></div>
+    <h2>A tettes: dr. Szalay Márton</h2>
+    <p><strong>Mikor:</strong> december 29-én 23:29-kor. A dulakodás 23:24 és 23:27 között zajlott.</p>
+    <p><strong>Hogyan:</strong> 22:45 és 23:08 között, a könyvtárban tartott megbeszélésen Márton Réka altatójából tett Henrik teájába. Az altatót a keleti közös fürdőből vitte el. Áramszünetkor (23:12) azt mondta Rékának, hogy gyertyáért megy, de a sötétben a dohányzón át visszament a könyvtárba, és bezárta a folyosói ajtót. 23:24 körül a bordó díszpárnával megfojtotta a kábult Henriket, aki megkarcolta a csuklóját. Elmosta a csészét, kinyitotta az ablakot, hogy elmossa a halál idejét, és elvitte a kék mappát. Kivárta a dohányzóban, amíg Bálint és Réka elhagyja a biliárdtermet, közben idegesen elszívott fél szivarkát. A mappát a szobája kandallójában elégette.</p>
+    <p><strong>Indíték:</strong> sikkasztott az alapítványtól. Az égett kivonaton 11 millió forintnyi utalás látszik a saját irodájának. Henrik másnap 10-kor új ügyvédet hívott, könyvelőt keresett, és ha nem kap magyarázatot, rendőrséget.</p>
+    <h3>A kulcslépések</h3>
     <ol>
-      <li><strong>A halál ideje 22:47:</strong> a törött óra és a boncolás egybevág.</li>
-      <li><strong>Áron kártyájával mentek fel 22:38-kor, de a 11. emeletről.</strong> Áron ekkor zakó nélkül telefonált a főbejárat előtt, a kártya pedig a bárban hagyott zakóban volt.</li>
-      <li><strong>A zakóhoz Gergely fért hozzá:</strong> áthajolt fölötte, amíg Áron a mosdóban volt, aztán 22:12-kor felment a 11. emeletre.</li>
-      <li><strong>Gergely alibije hazugság:</strong> 22:30 és 23:00 között nem hallhatta az 1125-ös vendég álombeszédét, mert az 1125 vendégei csak 23:40-kor jelentkeztek be. Az 1123 pedig üres.</li>
-      <li><strong>A szemtanú:</strong> Marko 22:53-kor sötétszürke kapucnis férfit látott kijönni a lépcsőházból, aki az 1120-as szobák felé sietett. A kártya az 1124 melletti szemetesben került elő, a szőnyegen pedig sötétszürke pamutszálak voltak.</li>
-      <li><strong>A tettes balkezes:</strong> Gergely bal kézzel írt alá.</li>
-      <li><strong>Az indíték bizonyítékai:</strong> „G. – NEM.”, Laci üzenetei, a csütörtöki végrendelet-módosítás és a 23:58-as „Megoldottam”.</li>
+      <li><strong>Az óra UTC-ben jár.</strong> Lili 21:45-kor 72-es pulzust olvasott le, az exportban a 72-es érték 20:45Z-nél áll, vagyis a helyi idő egy órával több. A dulakodás 23:24–23:27, a halál 23:29. Ugyanígy látszik Bálint veszekedése 22:15–22:35 között, Márton látogatása 22:45–23:00 között, és az altató hatása 23:05-től. Ez 22:35–22:50 körüli bevételt jelent. Bálint 22:32-kor már elment, és nem töltött teát. Márton viszont ekkor ott volt, és maga mondta, hogy ő töltötte a teát.</li>
+      <li><strong>Ki hol volt 23:24 és 23:29 között?</strong> Nóra a pincében: 23:27:12-kor kézzel próbálta indítani a generátort, és a pince csak a konyhán át érhető el, ahol Eszterék ültek. Eszter és Lili a konyhában voltak, Lili 23:24 körül visszaért. Bálint és Réka a biliárdteremben veszekedtek: ezt Bálint vallomása és Lili Eszternek tett megjegyzése is igazolja.</li>
+      <li><strong>Márton és Réka közös alibije hamis.</strong> Az ebédlő gyertyáit sosem gyújtották meg, a biliárdteremben nincs viasz, és nem is játszottak: a táblán csak a dec. 27-i eredmény áll. Bálint Rékát egyedül találta.</li>
+      <li><strong>Az út.</strong> A folyosói ajtó már 23:20 előtt belülről zárva volt (Lili), a kulcs belül maradt. Bejutni csak a biliárdterem felől, a dohányzón át lehetett. Márton 23:12-kor éppen onnan indult el.</li>
+      <li><strong>A nyomok.</strong> Café Crème szivarka a dohányzóban 22:30 utánról, pedig Márton azt állította, hogy vacsora óta nem járt ott. Vetiveres kölni a párnán. Karcolás a csuklóján, a „fém szegély” nem létezik. A csésze elmosva.</li>
     </ol>
-    <h3>A félrevezető szálak</h3>
+    <h3>A ház többi titka</h3>
     <ul>
-      <li><strong>Krisztina</strong> balkezes, és volt indítéka, de 22:44-kor a wellnessben fizetett egy teát.</li>
-      <li><strong>Áron</strong> kártyáját használták, és sikkasztott, de a portás végig látta, és jobbkezes.</li>
-      <li><strong>Dóra</strong> 21:43-kor elhagyta a hotelt, és otthonról videóhívásban volt.</li>
-    </ul>`;
+      <li><strong>Bálint</strong> fél egy után ellopott két palack Tokaji Eszenciát, és az autójába vitte. Erről árulkodnak a hónyomok, a csomagtartó és a horzsolás a jeges fedéltől. Ezért hazudta, hogy ki sem mozdult.</li>
+      <li><strong>Réka</strong> viszonyt folytat Mártonnal (hajcsat a Zöld szobában). Azért hazudott, mert az ő altatója hiányzott, és Márton közös alibit ajánlott.</li>
+      <li><strong>Lili</strong> Henrik lánya, ezt mutatja a laborlevél és a tervezet első pontja. Eltitkolta, hogy a könyvtár ajtajához ment, mert attól félt, gyanúba keveredik. Erről árulkodik a piros viasz és az égett ujja. Neki éppen az új végrendelet aláírása lett volna érdeke.</li>
+      <li><strong>Eszter</strong> nem hazudott, csak tévedett a szívmegállással.</li>
+      <li><strong>A csapdák:</strong> az UTC-időbélyegek Bálintra mutattak volna. A 00:20-kor szóló rádió nem élet jele, mert áramszünet után magától indul újra. A tervezetben Márton a végrehajtó, ezért úgy tűnhetett, hogy neki éppen az aláírás az érdeke.</li>
+    </ul>
+    <h3>A valódi idővonal (dec. 29.)</h3>
+    <table>
+      <tr><th>Idő</th><th>Esemény</th></tr>
+      <tr><td>21:45</td><td>Lili beadja az esti gyógyszereket (pulzus 72)</td></tr>
+      <tr><td>22:00</td><td>Nóra beviszi a teát; a kék mappa az asztalon</td></tr>
+      <tr><td>22:15–22:32</td><td>Bálint és Henrik veszekszik</td></tr>
+      <tr><td>22:30</td><td>Nóra kiüríti a dohányzó hamutálait</td></tr>
+      <tr><td>22:45–23:08</td><td>Márton a könyvtárban, altatót tesz a teába</td></tr>
+      <tr><td>23:08</td><td>Márton átmegy Rékához a biliárdterembe</td></tr>
+      <tr><td>23:12</td><td>Áramszünet; Márton a dohányzón át visszamegy, bezárja a főajtót</td></tr>
+      <tr><td>~23:17</td><td>Bálint lemegy, Rékát egyedül találja</td></tr>
+      <tr><td>~23:20</td><td>Lili a zárt ajtónál, piros viasz csöppen</td></tr>
+      <tr><td>23:24–23:29</td><td>A gyilkosság</td></tr>
+      <tr><td>~23:38</td><td>Bálint és Réka felmegy; Márton kijön a dohányzóból</td></tr>
+      <tr><td>23:41</td><td>Visszajön az áram, a rádió újraindul</td></tr>
+      <tr><td>éjfél után</td><td>Márton elégeti a kivonatokat; Bálint ellopja a Tokajit</td></tr>
+    </table>`;
 
-  const letterText = 'Szerelmem!\n\nNagyon jó volt veled ez a 2 év. Voltak vitáink, volt mindenkinek rosszabb időszaka, de mindig számíthattunk egymásra. Szeretném, ha tudnád, én mindig itt vagyok veled.\n\nBoldog évfordulót!\n\nSzeretettel, Miki';
+  const bonus = [
+    { q: 'Ki lopott a pincéből?', a: 'balint', expl: 'Bálint: hónyomok az oldalajtótól az Audiig, a palackok a csomagtartóban, horzsolás a jeges fedéltől.' },
+    { q: 'Ki hazudott azért, hogy fedezze a tettest (anélkül, hogy tudta volna, mit tett)?', a: 'reka', expl: 'Réka: viszonya van Mártonnal, és mivel az ő altatója hiányzott, elfogadta a közös alibit.' },
+    { q: 'Ki volt Henrik titkolt gyermeke?', a: 'lili', expl: 'Lili: a GenoLab levele és a tervezet első pontja. „L. – jan. 1. Elmondani mindenkinek.”' }
+  ];
+  const people = [['', 'Válassz…'], ['eszter', 'dr. Vámos Eszter'], ['balint', 'Vámos Bálint'], ['reka', 'Vámosné Kiss Réka'], ['marton', 'dr. Szalay Márton'], ['lili', 'Pintér Lili'], ['nora', 'Kertész Nóra']];
 
-  /* ---------------- helpers ---------------- */
+  /* ================= HELPERS ================= */
   const $ = s => document.querySelector(s);
   const pad = n => String(n).padStart(2, '0');
   const fmt = sec => (sec >= 3600 ? Math.floor(sec / 3600) + ':' : '') + pad(Math.floor(sec % 3600 / 60)) + ':' + pad(sec % 60);
-  const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z]/g, '');
-
   function show(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    $('#' + id).classList.add('active');
-    window.scrollTo(0, 0);
-    store.set('screen', id);
+    $('#' + id).classList.add('active'); window.scrollTo(0, 0); store.set('screen', id);
+    $('#snow').style.display = id === 'intro' || id === 'solved' ? '' : 'none';
   }
 
-  /* ---------------- timer ---------------- */
-  let startAt = store.get('startAt', null);
-  let finishedSec = store.get('finishedSec', null);
-  let timerId = null;
-  function elapsed() { return startAt ? Math.floor((Date.now() - startAt) / 1000) : 0; }
-  function tick() { $('#timer').textContent = fmt(finishedSec !== null ? finishedSec : elapsed()); }
-  function startTimer() {
-    if (!startAt) { startAt = Date.now(); store.set('startAt', startAt); }
-    clearInterval(timerId); tick(); timerId = setInterval(tick, 1000);
-  }
+  /* snow */
+  (function makeSnow() {
+    const box = $('#snow');
+    for (let i = 0; i < 70; i++) {
+      const s = document.createElement('span'); const size = 2 + Math.random() * 5;
+      s.style.width = s.style.height = size + 'px';
+      s.style.left = Math.random() * 100 + 'vw';
+      s.style.setProperty('--drift', (Math.random() * 12 - 6) + 'vw');
+      s.style.animationDuration = (9 + Math.random() * 14) + 's';
+      s.style.animationDelay = (-Math.random() * 20) + 's';
+      s.style.opacity = .25 + Math.random() * .5;
+      box.appendChild(s);
+    }
+  })();
 
-  /* ---------------- board ---------------- */
+  /* timer */
+  let startAt = store.get('startAt', null), finishedSec = store.get('finishedSec', null), timerId = null;
+  const elapsed = () => startAt ? Math.floor((Date.now() - startAt) / 1000) : 0;
+  const tick = () => { $('#timer').textContent = fmt(finishedSec !== null ? finishedSec : elapsed()); };
+  function startTimer() { if (!startAt) { startAt = Date.now(); store.set('startAt', startAt); } clearInterval(timerId); tick(); timerId = setInterval(tick, 1000); }
+
+  /* board */
   let readSet = new Set(store.get('read', []));
-  function renderSuspects() {
-    $('#suspects').innerHTML = suspects.map(s => `
-      <div class="suspect"><div class="monogram">${s.mono}</div><div><h3>${s.name}</h3><p>${s.info}</p></div></div>`).join('');
-  }
+  $('#suspects').innerHTML = suspects.map(s => `<div class="suspect"><div class="monogram">${s.mono}</div><div><h3>${s.name}</h3><p>${s.info}</p></div></div>`).join('');
   function renderGrid() {
     $('#grid').innerHTML = docs.map((d, i) => `
       <button class="card ${readSet.has(i) ? 'read' : ''}" data-i="${i}">
-        <span class="num">${pad(i + 1)}</span>
-        <span class="type">${d.type}</span>
-        <span class="name">${d.title}</span>
-        <span class="seen">ÁTNÉZVE</span>
+        <span class="num">${pad(i + 1)}</span><span class="type">${d.type}</span><span class="name">${d.title}</span><span class="seen">ÁTNÉZVE</span>
       </button>`).join('');
     $('#progress').textContent = readSet.size + ' / ' + docs.length + ' átnézve';
   }
-  $('#grid').addEventListener('click', e => {
-    const c = e.target.closest('.card'); if (c) openDoc(+c.dataset.i);
-  });
+  $('#grid').addEventListener('click', e => { const c = e.target.closest('.card'); if (c) openDoc(+c.dataset.i); });
 
-  /* ---------------- modal ---------------- */
+  /* modal */
   const overlay = $('#overlay'), sheet = $('#sheet');
   let current = null, lastFocus = null;
   function openSheet(html) {
     lastFocus = document.activeElement;
     sheet.innerHTML = '<button class="close" aria-label="Bezárás">×</button>' + html;
-    overlay.classList.add('open'); overlay.scrollTop = 0;
-    document.body.style.overflow = 'hidden';
+    overlay.classList.add('open'); overlay.scrollTop = 0; document.body.style.overflow = 'hidden';
     sheet.querySelector('.close').addEventListener('click', closeSheet);
     setTimeout(() => sheet.querySelector('.close').focus(), 50);
   }
-  function closeSheet() {
-    overlay.classList.remove('open'); document.body.style.overflow = ''; current = null;
-    if (lastFocus) lastFocus.focus();
-  }
+  function closeSheet() { overlay.classList.remove('open'); document.body.style.overflow = ''; current = null; if (lastFocus) lastFocus.focus(); }
   overlay.addEventListener('click', e => { if (e.target === overlay) closeSheet(); });
   document.addEventListener('keydown', e => {
     if (!overlay.classList.contains('open')) return;
     if (e.key === 'Escape') closeSheet();
-    if (current !== null && !/input|textarea/i.test(document.activeElement.tagName)) {
+    if (current !== null && !/input|textarea|select/i.test(document.activeElement.tagName)) {
       if (e.key === 'ArrowRight' && current < docs.length - 1) openDoc(current + 1);
       if (e.key === 'ArrowLeft' && current > 0) openDoc(current - 1);
     }
   });
-
   function openDoc(i) {
-    const d = docs[i];
-    readSet.add(i); store.set('read', [...readSet]); renderGrid();
-    openSheet(`
-      <div class="doc-head"><span>BRFK · Ügyszám 1125/2026</span><span>Bizonyíték ${pad(i + 1)} · ${d.type}</span></div>
-      ${d.html}
-      <div class="sheet-nav">
-        <button class="btn" id="prevDoc" ${i === 0 ? 'disabled' : ''}>← Előző</button>
-        <button class="btn" id="backDoc">Vissza a táblához</button>
-        <button class="btn solid" id="nextDoc" ${i === docs.length - 1 ? 'disabled' : ''}>Következő →</button>
-      </div>`);
+    const d = docs[i]; readSet.add(i); store.set('read', [...readSet]); renderGrid();
+    openSheet(`<div class="doc-head"><span>Mátrai Rk. · Ügyszám 2912/2026</span><span>${pad(i + 1)} · ${d.type}</span></div>${d.html}
+      <div class="sheet-nav"><button class="btn" id="prevDoc" ${i === 0 ? 'disabled' : ''}>← Előző</button><button class="btn" id="backDoc">Vissza a táblához</button><button class="btn solid" id="nextDoc" ${i === docs.length - 1 ? 'disabled' : ''}>Következő →</button></div>`);
     current = i;
-    $('#prevDoc').onclick = () => openDoc(i - 1);
-    $('#nextDoc').onclick = () => openDoc(i + 1);
-    $('#backDoc').onclick = closeSheet;
+    $('#prevDoc').onclick = () => openDoc(i - 1); $('#nextDoc').onclick = () => openDoc(i + 1); $('#backDoc').onclick = closeSheet;
   }
 
-  /* notes */
   $('#notesBtn').onclick = () => {
-    openSheet(`
-      <div class="doc-head"><span>BRFK · Ügyszám 1125/2026</span><span>Nyomozói jegyzetek</span></div>
-      <h2>Jegyzetek</h2>
-      <p class="meta">Amit ide írtok, azt a böngésző megjegyzi.</p>
-      <textarea class="notes" id="notesArea" placeholder="Gyanús időpontok, ellentmondások, ötletek…"></textarea>`);
-    const ta = $('#notesArea'); ta.value = store.get('notes', '');
-    ta.addEventListener('input', () => store.set('notes', ta.value));
-    setTimeout(() => ta.focus(), 60);
+    openSheet(`<div class="doc-head"><span>Ügyszám 2912/2026</span><span>Nyomozói jegyzetek</span></div><h2>Jegyzetek</h2><p class="meta">A böngésző megjegyzi, amit ide írtok.</p><textarea class="notes" id="notesArea" placeholder="Idővonal, ki hol volt, ki mit hazudik…"></textarea>`);
+    const ta = $('#notesArea'); ta.value = store.get('notes', ''); ta.addEventListener('input', () => store.set('notes', ta.value)); setTimeout(() => ta.focus(), 60);
   };
 
-  /* hints */
   let hintsShown = store.get('hints', 0);
   $('#hintsBtn').onclick = () => {
-    openSheet(`
-      <div class="doc-head"><span>BRFK · Ügyszám 1125/2026</span><span>Segítség</span></div>
-      <h2>Elakadtatok?</h2>
-      <p class="meta">A segítségek egyre többet árulnak el. Csak akkor nyissátok ki a következőt, ha tényleg kell.</p>
-      ${hints.map((h, i) => `
-        <div class="hint-item ${i < hintsShown ? 'shown' : ''}" data-h="${i}">
-          <strong>${i + 1}. segítség</strong>
-          <button class="btn" ${i > hintsShown ? 'disabled' : ''}>Megnyitás</button>
-          <div class="hidden-text">${h}</div>
-        </div>`).join('')}`);
-    sheet.querySelectorAll('.hint-item .btn').forEach(b => b.onclick = () => {
-      hintsShown = Math.max(hintsShown, +b.parentElement.dataset.h + 1); store.set('hints', hintsShown);
-      $('#hintsBtn').click();
-    });
+    openSheet(`<div class="doc-head"><span>Ügyszám 2912/2026</span><span>Segítség</span></div><h2>Elakadtatok?</h2><p class="meta">Csak sorban nyithatók meg. Mindegyik egy kicsit többet mond.</p>
+      ${hints.map((h, i) => `<div class="hint-item ${i < hintsShown ? 'shown' : ''}" data-h="${i}"><strong>${i + 1}. segítség</strong> <button class="btn" ${i > hintsShown ? 'disabled' : ''}>Megnyitás</button><div class="hidden-text">${h}</div></div>`).join('')}`);
+    sheet.querySelectorAll('.hint-item .btn').forEach(b => b.onclick = () => { hintsShown = Math.max(hintsShown, +b.parentElement.dataset.h + 1); store.set('hints', hintsShown); $('#hintsBtn').click(); });
   };
 
-  /* accusation */
   let wrongTries = store.get('wrong', 0);
-  function radios(name, opts, four) {
-    return `<div class="choices ${four ? 'four' : ''}">` + opts.map(([v, t]) => `
-      <label class="choice"><input type="radio" name="${name}" value="${v}"><span>${t}</span></label>`).join('') + '</div>';
-  }
   $('#accuseBtn').onclick = () => {
-    openSheet(`
-      <div class="doc-head"><span>BRFK · Ügyszám 1125/2026</span><span>Vádirat</span></div>
-      <h2>Vádemelés</h2>
-      <p class="meta">Csak akkor nyújtsátok be, ha mindketten egyetértetek. Elutasított vádak eddig: <span id="wrongCount">${wrongTries}</span></p>
-      <form id="accForm">
-        <div class="q-block"><h3>1. Ki ölte meg Halmos Viktort?</h3>${radios('who', accusation.who.options, true)}</div>
-        <div class="q-block"><h3>2. Mi volt az indíték?</h3>${radios('why', accusation.why.options)}</div>
-        <div class="q-block"><h3>3. Hogyan jutott fel és le a 12. emeletről?</h3>${radios('how', accusation.how.options)}</div>
-        <button class="btn solid big" type="submit">Vádirat benyújtása</button>
-        <div class="verdict" id="verdict"></div>
-      </form>`);
+    openSheet(`<div class="doc-head"><span>Ügyszám 2912/2026</span><span>Vádirat</span></div><h2>Vádemelés</h2>
+      <p class="meta">Az ügyész csak akkor fogadja el, ha mind az öt pont helyes. Elutasított vádiratok eddig: <span id="wrongCount">${wrongTries}</span></p>
+      <form id="accForm">${Q.map(q => `<div class="q-block"><h3>${q.title}</h3><div class="choices ${q.cls}">${q.options.map(([v, t]) => `<label class="choice"><input type="radio" name="${q.key}" value="${v}"><span>${t}</span></label>`).join('')}</div></div>`).join('')}
+      <button class="btn solid big" type="submit">Vádirat benyújtása</button><div class="verdict" id="verdict"></div></form>`);
     $('#accForm').onsubmit = e => {
       e.preventDefault();
-      const f = new FormData(e.target);
-      const ans = { who: f.get('who'), why: f.get('why'), how: f.get('how') };
-      const v = $('#verdict');
-      if (!ans.who || !ans.why || !ans.how) {
-        v.textContent = 'Az ügyész mindhárom kérdésre választ vár.'; v.classList.remove('show'); void v.offsetWidth; v.classList.add('show'); return;
-      }
-      const okCount = ['who', 'why', 'how'].filter(k => ans[k] === accusation[k].correct).length;
-      if (okCount === 3) { closeSheet(); solved(); return; }
+      const f = new FormData(e.target), v = $('#verdict');
+      const flash = html => { v.innerHTML = html; v.classList.remove('show'); void v.offsetWidth; v.classList.add('show'); };
+      if (Q.some(q => !f.get(q.key))) return flash('Az ügyész mind az öt kérdésre választ vár.');
+      const ok = Q.filter(q => f.get(q.key) === q.correct).length;
+      if (ok === Q.length) { closeSheet(); solved(); return; }
       wrongTries++; store.set('wrong', wrongTries); $('#wrongCount').textContent = wrongTries;
-      v.innerHTML = '<strong>Az ügyész elutasította a vádat.</strong><br>' + (okCount === 0
-        ? 'Egyik állításotok sem áll meg a bíróság előtt. Vissza a bizonyítékokhoz!'
-        : okCount + ' a 3 állításból stimmel, de ez még kevés az ítélethez. Nyomozzatok tovább!');
-      v.classList.remove('show'); void v.offsetWidth; v.classList.add('show');
+      flash('<strong>Az ügyész elutasította a vádiratot.</strong><br>' + (wrongTries >= 3
+        ? `Az öt pontból ${ok} áll meg a bíróság előtt.`
+        : 'A bizonyítékok nem támasztják alá. (A harmadik elutasítástól az ügyész elárulja, hány pont stimmel.)'));
     };
   };
 
-  /* ---------------- solved ---------------- */
   function solved() {
     if (finishedSec === null) { finishedSec = elapsed(); store.set('finishedSec', finishedSec); }
     clearInterval(timerId); tick();
-    $('#solveTime').textContent = 'Megoldási idő: ' + fmt(finishedSec) + ' · Elutasított vádak: ' + wrongTries;
+    $('#solveTime').textContent = 'Megoldási idő: ' + fmt(finishedSec) + ' · Elutasított vádiratok: ' + wrongTries + ' · Felhasznált segítség: ' + hintsShown + '/4';
     $('#solutionSheet').innerHTML = solutionHTML;
-    show('solved');
-  }
-  $('#toRoomBtn').onclick = () => show('room');
-
-  /* ---------------- room 1125 ---------------- */
-  const checks = {
-    1: v => v.includes('viz'),
-    2: v => v.includes('latin'),
-    3: v => v.includes('teknos') || v.includes('tekik') || v.includes('turtle')
-  };
-  const tipText = { 1: 'Tipp: a bárpultos is emlékszik rá.', 2: 'Tipp: Marko Babić is pont ezt kiabálta.', 3: 'Tipp: a portás látott egyet egy bőröndön.' };
-  const misses = { 1: 0, 2: 0, 3: 0 };
-  $('#lockForm').onsubmit = e => {
-    e.preventDefault();
-    let all = true;
-    document.querySelectorAll('.lock .field').forEach(f => {
-      const q = f.dataset.q, inp = f.querySelector('input'), fb = f.querySelector('.fb');
-      const ok = checks[q](norm(inp.value));
-      f.classList.remove('bad', 'ok'); void f.offsetWidth;
-      if (ok) { f.classList.add('ok'); fb.textContent = 'Stimmel.'; }
-      else {
-        all = false; misses[q]++; f.classList.add('bad');
-        fb.textContent = misses[q] >= 2 ? tipText[q] : 'Ez nem stimmel. Próbáld újra!';
-      }
+    $('#bonusSheet').innerHTML = `<div class="doc-head"><span>Ügyszám 2912/2026</span><span>Bónusz</span></div><h2>A ház többi titka</h2>
+      <p class="meta">Mielőtt elolvassátok a zárójelentést: tudjátok, ki mit titkolt?</p>
+      ${bonus.map((b, i) => `<div class="row"><label for="b${i}">${b.q}</label><select id="b${i}">${people.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select><div class="res" id="r${i}"></div></div>`).join('')}
+      <button class="btn solid" id="bonusBtn">Ellenőrzés</button>`;
+    $('#bonusBtn').onclick = () => bonus.forEach((b, i) => {
+      const ok = $('#b' + i).value === b.a, r = $('#r' + i);
+      r.className = 'res ' + (ok ? 'ok' : 'bad'); r.textContent = (ok ? 'Stimmel. ' : 'Nem talált. ') + b.expl;
     });
-    if (all) openEnvelope();
-  };
-
-  function openEnvelope() {
-    $('#lockForm').style.visibility = 'hidden';
-    const sub = $('#room .sub'); sub.style.transition = 'opacity .4s'; sub.style.opacity = '0';
-    $('#envScene').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    $('#envScene').classList.add('open');
-    setTimeout(() => { show('finale'); typeLetter(); }, 1800);
+    show('solved');
+    // put bonus before the report so it isn't spoiled
+    $('#solutionSheet').before($('#bonusSheet'));
   }
 
-  /* ---------------- finale ---------------- */
-  function typeLetter() {
-    const body = $('#letterBody'); body.textContent = '';
-    const cursor = document.createElement('span'); cursor.className = 'cursor';
-    const textNode = document.createTextNode(''); body.append(textNode, cursor);
-    let i = 0;
-    const step = () => {
-      if (i >= letterText.length) {
-        setTimeout(() => { $('#letterPs').classList.add('show'); $('#turtle').classList.add('show'); cursor.remove(); }, 900);
-        hearts(); return;
-      }
-      const ch = letterText[i++]; textNode.data += ch;
-      const delay = ch === '\n' ? 380 : /[.,!]/.test(ch) ? 260 : 45 + Math.random() * 40;
-      setTimeout(step, delay);
-    };
-    setTimeout(step, 900);
-  }
-  function hearts() {
-    const box = $('#hearts');
-    for (let k = 0; k < 28; k++) {
-      const h = document.createElement('span'); h.textContent = '♥';
-      h.style.left = Math.random() * 100 + 'vw';
-      h.style.fontSize = (1 + Math.random() * 2.2) + 'rem';
-      h.style.animationDuration = (7 + Math.random() * 7) + 's';
-      h.style.animationDelay = (Math.random() * 6) + 's';
-      box.appendChild(h);
-    }
-  }
-
-  /* ---------------- start / resume ---------------- */
-  renderSuspects(); renderGrid();
   $('#startBtn').onclick = () => { show('board'); startTimer(); openDoc(0); };
+  renderGrid();
 
-  // resume after an accidental refresh
   const saved = store.get('screen', 'intro');
-  if (saved !== 'intro' && startAt) {
-    startTimer();
-    if (saved === 'board') show('board');
-    else if (finishedSec !== null) { solved(); if (saved === 'room' || saved === 'finale') show('room'); }
-  }
+  if (saved !== 'intro' && startAt) { startTimer(); if (finishedSec !== null) solved(); else show('board'); }
 
-  // secret reset for testing: press Shift+R three times on the intro screen
   let rCount = 0;
   document.addEventListener('keydown', e => {
-    if (/input|textarea/i.test(document.activeElement.tagName)) return;
+    if (/input|textarea|select/i.test(document.activeElement.tagName)) return;
     if (e.key === 'R' && e.shiftKey) {
-      if (++rCount >= 3) { try { Object.keys(localStorage).filter(k => k.startsWith('aranyhid:')).forEach(k => localStorage.removeItem(k)); } catch (err) {} location.reload(); }
+      if (++rCount >= 3) { try { Object.keys(localStorage).filter(k => k.startsWith('hovar:')).forEach(k => localStorage.removeItem(k)); } catch (err) {} location.reload(); }
     } else rCount = 0;
   });
 })();
